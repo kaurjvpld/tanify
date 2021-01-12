@@ -1,2 +1,2 @@
-# tanify
+# Tanify
 Source code for Tanify App
