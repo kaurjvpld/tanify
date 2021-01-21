@@ -1,26 +1,25 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+import {PermissionsAndroid, Platform} from 'react-native';
+import SunScreen from './screens/landingScreen/sunScreen';
 
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS === 'android') {
+        await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        );
+      }
+    })();
+  });
+
   return (
     <>
-      <View style={styles.container}>
-        <Text>Hello World!</Text>
-      </View>
+      <SunScreen />
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-});
 
 export default App;
