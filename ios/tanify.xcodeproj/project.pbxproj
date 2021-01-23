@@ -15,6 +15,7 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* tanifyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* tanifyTests.m */; };
+		34FADE0425BC96C200A6FF4D /* EmptyFileForGeolocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FADE0325BC96C200A6FF4D /* EmptyFileForGeolocation.swift */; };
 		5C3705120B448A81F442CF5C /* libPods-tanify-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4191BCBD5870509166ECBE9E /* libPods-tanify-tvOSTests.a */; };
 		666A85FCC96900F7E76328F1 /* libPods-tanify-tanifyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C35A6830294552A5B1A9A351 /* libPods-tanify-tanifyTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -55,6 +56,8 @@
 		24CFB2085AB966E4F71387A3 /* Pods-tanify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tanify.release.xcconfig"; path = "Target Support Files/Pods-tanify/Pods-tanify.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* tanify-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tanify-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* tanify-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "tanify-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34FADE0225BC96C200A6FF4D /* tanify-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "tanify-Bridging-Header.h"; sourceTree = "<group>"; };
+		34FADE0325BC96C200A6FF4D /* EmptyFileForGeolocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFileForGeolocation.swift; sourceTree = "<group>"; };
 		374C3CFF3AB94FA48953125D /* Pods-tanify-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tanify-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-tanify-tvOSTests/Pods-tanify-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		4191BCBD5870509166ECBE9E /* libPods-tanify-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tanify-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C61AEA339C97F20A92EDA90 /* Pods-tanify-tanifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tanify-tanifyTests.debug.xcconfig"; path = "Target Support Files/Pods-tanify-tanifyTests/Pods-tanify-tanifyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				34FADE0325BC96C200A6FF4D /* EmptyFileForGeolocation.swift */,
+				34FADE0225BC96C200A6FF4D /* tanify-Bridging-Header.h */,
 			);
 			name = tanify;
 			sourceTree = "<group>";
@@ -294,7 +299,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = LKG6WX89V3;
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1230;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -569,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				34FADE0425BC96C200A6FF4D /* EmptyFileForGeolocation.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,6 +616,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4C61AEA339C97F20A92EDA90 /* Pods-tanify-tanifyTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -633,6 +640,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 23CD9BC5EC26F256CF39663D /* Pods-tanify-tanifyTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = tanifyTests/Info.plist;
@@ -667,6 +675,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = tanify;
+				SWIFT_OBJC_BRIDGING_HEADER = "tanify-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -690,6 +699,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = tanify;
+				SWIFT_OBJC_BRIDGING_HEADER = "tanify-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
