@@ -1,8 +1,18 @@
 import Geolocation from '@react-native-community/geolocation';
+import axios from 'axios';
 
-export const getWeatherData = async () => {
-    let location = await getCurrentLocation();
-    console.log('location: ' + JSON.stringify(location));
+const OPEN_WEATHER_API_KEY = 'eb9591c25fb1327202a280c91d7c4d9c';
+
+export const getUVIndex = async () => {
+    try {
+        let location = await getCurrentLocation();
+        let weatherData = await axios.get(
+            `https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=hourly,daily,minutely,alerts&appid=${OPEN_WEATHER_API_KEY}`,
+        );
+        return weatherData.data.current.uvi;
+    } catch (error) {
+        throw error;
+    }
 };
 
 const getCurrentLocation = () => {

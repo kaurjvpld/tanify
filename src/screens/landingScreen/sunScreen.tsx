@@ -1,16 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { getWeatherData } from '../../services/weatherService';
+import { getUVIndex } from '../../services/weatherService';
 
 const SunScreen = () => {
+    const [uvindex, setUvindex] = useState();
+
     useEffect(() => {
-        getWeatherData();
+        getUVIndex()
+            .then((uvi) => {
+                setUvindex(uvi);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     });
 
     return (
         <>
             <View style={styles.container}>
-                <Text>Hello World!</Text>
+                <Text>{uvindex}</Text>
             </View>
         </>
     );
