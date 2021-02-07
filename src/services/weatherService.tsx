@@ -3,13 +3,24 @@ import axios from 'axios';
 
 const OPEN_WEATHER_API_KEY = 'eb9591c25fb1327202a280c91d7c4d9c';
 
-export const getUVIndex = async () => {
+export interface WeatherData {
+    uvIndex: string;
+    temperature: number;
+}
+
+export const getWeatherData: () => WeatherData = async () => {
     try {
         let location = await getCurrentLocation();
         let weatherData = await axios.get(
-            `https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=hourly,daily,minutely,alerts&appid=${OPEN_WEATHER_API_KEY}`,
+            `https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=hourly,daily,minutely,alert&units=metric&appid=${OPEN_WEATHER_API_KEY}`,
         );
-        return weatherData.data.current.uvi;
+
+        let result = {
+            uvIndex: weatherData.data.current.uvi,
+            temperature: weatherData.data.current.temp,
+        };
+
+        return result;
     } catch (error) {
         throw error;
     }

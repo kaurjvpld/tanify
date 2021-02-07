@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { getUVIndex } from '../../services/weatherService';
+import { getWeatherData, WeatherData } from '../../services/weatherService';
 
 const SunScreen = () => {
-    const [uvindex, setUvindex] = useState();
+    const [weatherData, setWeatherData] = useState<WeatherData>(undefined);
 
     useEffect(() => {
-        getUVIndex()
-            .then((uvi) => {
-                setUvindex(uvi);
+        getWeatherData()
+            .then((data) => {
+                setWeatherData(data);
             })
             .catch((error) => {
                 console.log(error);
@@ -18,7 +18,8 @@ const SunScreen = () => {
     return (
         <>
             <View style={styles.container}>
-                <Text>{uvindex}</Text>
+                <Text>{weatherData?.uvIndex}</Text>
+                <Text>{weatherData?.temperature}</Text>
             </View>
         </>
     );
@@ -27,7 +28,7 @@ const SunScreen = () => {
 const styles = StyleSheet.create({
     container: {
         ...StyleSheet.absoluteFillObject,
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white',
