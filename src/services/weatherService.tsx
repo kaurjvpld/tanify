@@ -17,7 +17,7 @@ export const getWeatherData: () => WeatherData = async () => {
 
         let result = {
             uvIndex: weatherData.data.current.uvi,
-            temperature: weatherData.data.current.temp,
+            temperature: Math.round(weatherData.data.current.temp),
         };
 
         return result;
