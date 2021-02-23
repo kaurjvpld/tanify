@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, ScrollView, View } from 'react-native';
 import { getWeatherData, WeatherData } from '../../services/weatherService';
 import { TanifyLogo } from '../../assets';
-import { Zero } from '../../assets/index';
-import CircleView from '../../components/CircleView';
+import CircleView from '../../components/circleView';
+import UvIndex from '../../components/uvIndex';
 
 const SunScreen = () => {
     const [weatherData, setWeatherData] = useState<WeatherData>({
         uvIndex: 0,
-        temperature: -5,
+        temperature: undefined,
     });
 
     useEffect(() => {
@@ -27,7 +27,9 @@ const SunScreen = () => {
             contentContainerStyle={styles.contentContainer}>
             <TanifyLogo.default />
             <Text style={styles.temp}>{weatherData?.temperature}°C</Text>
-            <Zero.default style={styles.uv} />
+            <View style={styles.uv}>
+                <UvIndex index={weatherData.uvIndex} />
+            </View>
             <Text style={styles.slogan}>'Nothing interesting happens'</Text>
             <CircleView
                 diameter={100}
