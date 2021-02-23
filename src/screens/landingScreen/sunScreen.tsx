@@ -41,33 +41,13 @@ const SunScreen = () => {
             <CircleView
                 diameter={180}
                 color={'#00cc7e'}
-                style={{ marginTop: 180 }}>
-                <Text
-                    style={{
-                        fontWeight: 'bold',
-                        fontSize: 45,
-                        color: 'white',
-                    }}>
-                    UV 0
-                </Text>
+                style={styles.uvStickerContainerStyle}>
+                <Text style={styles.uvStickerStyle}>UV 0</Text>
             </CircleView>
-            <View
-                style={{
-                    backgroundColor: 'white',
-                    paddingVertical: 4,
-                    paddingHorizontal: 30,
-                    marginTop: 50,
-                }}>
-                <Text style={{ fontWeight: 'bold', fontSize: 23 }}>SAFE</Text>
+            <View style={styles.uvInfoBoxContainerStyle}>
+                <Text style={styles.uvInfoBoxStyle}>SAFE</Text>
             </View>
-            <Text
-                style={{
-                    color: 'white',
-                    paddingHorizontal: 40,
-                    marginTop: 50,
-                    fontSize: 23,
-                    marginBottom: 180,
-                }}>
+            <Text style={styles.uvInfo}>
                 The sun's not interested in giving you a tan. We know it's hard,
                 but just go out and do something else that's not tanning. Go on
                 a date? Sudoku? It's up to you.
@@ -120,6 +100,31 @@ const styles = StyleSheet.create({
     },
     location: {
         fontWeight: 'bold',
+    },
+    uvStickerContainerStyle: {
+        marginTop: 180,
+    },
+    uvStickerStyle: {
+        fontWeight: 'bold',
+        fontSize: 45,
+        color: 'white',
+    },
+    uvInfoBoxContainerStyle: {
+        backgroundColor: 'white',
+        paddingVertical: 4,
+        paddingHorizontal: 30,
+        marginTop: 50,
+    },
+    uvInfoBoxStyle: {
+        fontWeight: 'bold',
+        fontSize: 23,
+    },
+    uvInfo: {
+        color: 'white',
+        paddingHorizontal: 40,
+        marginTop: 50,
+        fontSize: 23,
+        marginBottom: 180,
     },
 });
 

@@ -1,2 +1,14 @@
 export const TanifyLogo = require('./tanify.svg');
-export const Zero = require('./0.svg');
+export const Zero = require('./numbers/0.svg');
+export const One = require('./numbers/1.svg');
+export const Two = require('./numbers/2.svg');
+export const Three = require('./numbers/3.svg');
+export const Four = require('./numbers/4.svg');
+export const Five = require('./numbers/5.svg');
+export const Six = require('./numbers/6.svg');
+export const Seven = require('./numbers/7.svg');
+export const Eight = require('./numbers/8.svg');
+export const Nine = require('./numbers/9.svg');
+export const Ten = require('./numbers/10.svg');
+export const Eleven = require('./numbers/11.svg');
+export const Twelve = require('./numbers/12.svg');
