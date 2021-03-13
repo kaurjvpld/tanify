@@ -5,13 +5,13 @@ export const SET_TEMPERATURE: string = 'SET_TEMPERATURE';
 export const SET_TIME_OF_DAY: string = 'SET_TIME_OF_DAY';
 
 export interface SystemState {
-    mode: string | undefined;
+    mode: Mode | undefined;
     temperature: number | undefined;
-    timeOfDay: string | undefined;
+    timeOfDay: TimeOfDay | undefined;
 }
 
 export interface SetModeAction extends Action<typeof SET_MODE> {
-    payload: string;
+    payload: Mode;
 }
 
 export interface SetTemperatureAction extends Action<typeof SET_TEMPERATURE> {
@@ -19,10 +19,26 @@ export interface SetTemperatureAction extends Action<typeof SET_TEMPERATURE> {
 }
 
 export interface SetTimeOfDayAction extends Action<typeof SET_TIME_OF_DAY> {
-    payload: string;
+    payload: TimeOfDay;
 }
 
 export type SystemActionTypes =
     | SetModeAction
     | SetTemperatureAction
     | SetTimeOfDayAction;
+
+export enum TimeOfDay {
+    SunRise,
+    SunSet,
+    Day,
+    Night,
+    Cloudy,
+}
+
+export enum Mode {
+    Safe,
+    Easy,
+    Medium,
+    Hard,
+    Extreme,
+}
