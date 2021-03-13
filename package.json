@@ -11,12 +11,16 @@
   },
   "dependencies": {
     "@react-native-community/geolocation": "^2.0.2",
+    "@reduxjs/toolkit": "^1.5.0",
+    "@types/i18n-js": "^3.8.0",
+    "@types/react-redux": "^7.1.16",
     "axios": "^0.21.1",
     "i18n-js": "^3.8.0",
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-svg": "^12.1.0",
-    "react-native-svg-transformer": "^0.14.3"
+    "react-native-svg-transformer": "^0.14.3",
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
