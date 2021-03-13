@@ -1,6 +1,9 @@
 import { createStore, combineReducers } from 'redux';
+import systemReducer from './system/reducer';
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+    system: systemReducer,
+});
 
 const configureStore = () => createStore(rootReducer);
 

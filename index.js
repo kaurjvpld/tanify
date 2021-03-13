@@ -1,9 +1,18 @@
-/**
- * @format
- */
-
-import {AppRegistry} from 'react-native';
+import React from 'react';
+import { Provider as StoreProvider } from 'react-redux';
+import { AppRegistry } from 'react-native';
+import { name as appName } from './app.json';
 import App from './src/App';
-import {name as appName} from './app.json';
+import configureStore from './src/store';
 
-AppRegistry.registerComponent(appName, () => App);
+const store = configureStore();
+
+const Main = () => {
+    return (
+        <StoreProvider store={store}>
+            <App />
+        </StoreProvider>
+    );
+};
+
+AppRegistry.registerComponent(appName, () => Main);
