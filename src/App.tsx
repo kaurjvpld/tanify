@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { PermissionsAndroid, Platform, Alert } from 'react-native';
-import SunScreen from './screens/landingScreen/sunScreen';
 import { getWeatherData } from './services/weatherService';
 import { useDispatch } from 'react-redux';
 import { setTemperature, setTimeOfDay, setMode } from './store/system/actions';
 import { getTimeOfDay, getMode } from './util/systemStateUtil';
 import { TimeOfDay, Mode } from './store/system/types';
+import SunScreen from './screens/sunScreen';
 
 declare const global: { HermesInternal: null | {} };
 
