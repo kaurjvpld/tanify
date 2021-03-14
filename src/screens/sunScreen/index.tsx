@@ -69,8 +69,18 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         alignItems: 'center',
-        paddingTop: 50,
-        marginHorizontal: 20,
+        paddingTop: '10%',
+        paddingHorizontal: 20,
+    },
+    tanifyLogoContainer: {
+        height: '10%',
+        width: '100%',
+    },
+    tanifyLogo: {
+        flex: 1,
+        width: null,
+        height: null,
+        resizeMode: 'contain',
     },
     temp: {
         color: '#FFFFFF',
@@ -79,13 +89,13 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
     },
     uv: {
-        marginTop: 45,
-        height: 210,
+        marginTop: '8%',
+        height: '17%',
         width: '100%',
     },
     slogan: {
         color: 'white',
-        marginTop: 25,
+        marginTop: '6%',
         fontSize: 20,
         fontFamily: 'EuclidCircularB-BoldItalic',
     },
@@ -94,13 +104,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     modeContainer: {
-        marginTop: 15,
+        marginTop: '5%',
     },
     locationContainer: {
         backgroundColor: 'white',
         paddingHorizontal: 15,
         paddingVertical: 8,
-        marginTop: 20,
+        marginTop: '7%',
     },
     location: {
         fontFamily: 'EuclidCircularB-Bold',
@@ -130,16 +140,6 @@ const styles = StyleSheet.create({
         fontSize: 23,
         marginBottom: 180,
         fontFamily: 'EuclidCircularB-Regular',
-    },
-    tanifyLogoContainer: {
-        height: 100,
-        width: '100%',
-    },
-    tanifyLogo: {
-        flex: 1,
-        width: null,
-        height: null,
-        resizeMode: 'contain',
     },
 });
 
