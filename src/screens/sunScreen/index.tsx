@@ -34,8 +34,8 @@ const SunScreen = () => {
             <CircleView
                 diameter={100}
                 color={'#00cc7e'}
-                style={styles.keyWordContainer}>
-                <Text style={styles.keyWord}>SAFE</Text>
+                style={styles.modeContainer}>
+                <Text style={styles.mode}>SAFE</Text>
             </CircleView>
             <View style={styles.locationContainer}>
                 <Text style={styles.location}>Tallinn, Estonia</Text>
@@ -82,16 +82,15 @@ const styles = StyleSheet.create({
     },
     slogan: {
         color: 'white',
-        fontStyle: 'italic',
         marginTop: 25,
         fontSize: 20,
-        fontWeight: 'bold',
+        fontFamily: 'EuclidCircularB-BoldItalic',
     },
-    keyWord: {
-        fontWeight: 'bold',
+    mode: {
+        fontFamily: 'EuclidCircularB-Bold',
         fontSize: 18,
     },
-    keyWordContainer: {
+    modeContainer: {
         marginTop: 15,
     },
     locationContainer: {
@@ -101,13 +100,13 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     location: {
-        fontWeight: 'bold',
+        fontFamily: 'EuclidCircularB-Bold',
     },
     uvStickerContainerStyle: {
         marginTop: 180,
     },
     uvStickerStyle: {
-        fontWeight: 'bold',
+        fontFamily: 'EuclidCircularB-Bold',
         fontSize: 45,
         color: 'white',
     },
@@ -118,7 +117,7 @@ const styles = StyleSheet.create({
         marginTop: 50,
     },
     uvInfoBoxStyle: {
-        fontWeight: 'bold',
+        fontFamily: 'EuclidCircularB-Bold',
         fontSize: 23,
     },
     uvInfo: {
@@ -127,6 +126,7 @@ const styles = StyleSheet.create({
         marginTop: 50,
         fontSize: 23,
         marginBottom: 180,
+        fontFamily: 'EuclidCircularB-Regular',
     },
 });
 

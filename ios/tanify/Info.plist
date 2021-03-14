@@ -55,5 +55,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>EuclidCircularB-Bold.otf</string>
+		<string>EuclidCircularB-BoldItalic.otf</string>
+		<string>EuclidCircularB-Regular.otf</string>
+	</array>
 </dict>
 </plist>
