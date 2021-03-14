@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image, StyleSheet } from 'react-native';
 import {
     Zero,
     One,
@@ -18,34 +19,43 @@ import {
 const UvIndex = ({ index = 0 }) => {
     switch (index) {
         case 0:
-            return <Zero.default />;
+            return <Image source={Zero} style={styles.number} />;
         case 1:
-            return <One.default />;
+            return <Image source={One} style={styles.number} />;
         case 2:
-            return <Two.default />;
+            return <Image source={Two} style={styles.number} />;
         case 3:
-            return <Three.default />;
+            return <Image source={Three} style={styles.number} />;
         case 4:
-            return <Four.default />;
+            return <Image source={Four} style={styles.number} />;
         case 5:
-            return <Five.default />;
+            return <Image source={Five} style={styles.number} />;
         case 6:
-            return <Six.default />;
+            return <Image source={Six} style={styles.number} />;
         case 7:
-            return <Seven.default />;
+            return <Image source={Seven} style={styles.number} />;
         case 8:
-            return <Eight.default />;
+            return <Image source={Eight} style={styles.number} />;
         case 9:
-            return <Nine.default />;
+            return <Image source={Nine} style={styles.number} />;
         case 10:
-            return <Ten.default />;
+            return <Image source={Ten} style={styles.number} />;
         case 11:
-            return <Eleven.default />;
+            return <Image source={Eleven} style={styles.number} />;
         case 12:
-            return <Twelve.default />;
+            return <Image source={Twelve} style={styles.number} />;
         default:
-            return <Zero.default />;
+            return <Image source={Zero} style={styles.number} />;
     }
 };
 
 export default UvIndex;
+
+const styles = StyleSheet.create({
+    number: {
+        flex: 1,
+        width: null,
+        height: null,
+        resizeMode: 'contain',
+    },
+});

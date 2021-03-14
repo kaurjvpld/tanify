@@ -79,6 +79,8 @@ const styles = StyleSheet.create({
     },
     uv: {
         marginTop: 45,
+        height: 210,
+        width: '100%',
     },
     slogan: {
         color: 'white',
