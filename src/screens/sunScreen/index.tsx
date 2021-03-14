@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, StyleSheet, ScrollView, View } from 'react-native';
+import { Text, StyleSheet, ScrollView, View, Image } from 'react-native';
 import { getWeatherData, WeatherData } from '../../services/weatherService';
 import { TanifyLogo } from '../../assets';
 import CircleView from '../../components/circleView';
@@ -25,8 +25,13 @@ const SunScreen = () => {
         <ScrollView
             style={styles.scrollView}
             contentContainerStyle={styles.contentContainer}>
-            <TanifyLogo.default />
-            <Text style={styles.temp}>{weatherData?.temperature}°C</Text>
+            <View style={styles.tanifyLogoContainer}>
+                <Image source={TanifyLogo} style={styles.tanifyLogo} />
+            </View>
+            <Text style={styles.temp}>
+                {weatherData?.temperature >= 0 && '+'}
+                {weatherData?.temperature}°C
+            </Text>
             <View style={styles.uv}>
                 <UvIndex index={weatherData.uvIndex} />
             </View>
@@ -59,23 +64,19 @@ const SunScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     scrollView: {
         backgroundColor: '#2b2b2b',
     },
     contentContainer: {
         alignItems: 'center',
         paddingTop: 50,
+        marginHorizontal: 20,
     },
     temp: {
         color: '#FFFFFF',
         fontSize: 25,
-        fontWeight: 'bold',
+        fontFamily: 'EuclidCircularB-Bold',
         alignSelf: 'flex-end',
-        marginRight: 57,
-        marginTop: -25,
     },
     uv: {
         marginTop: 45,
@@ -129,6 +130,16 @@ const styles = StyleSheet.create({
         fontSize: 23,
         marginBottom: 180,
         fontFamily: 'EuclidCircularB-Regular',
+    },
+    tanifyLogoContainer: {
+        height: 100,
+        width: '100%',
+    },
+    tanifyLogo: {
+        flex: 1,
+        width: null,
+        height: null,
+        resizeMode: 'contain',
     },
 });
 
