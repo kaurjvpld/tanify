@@ -10,9 +10,10 @@ import {
 import { useSelector } from 'react-redux';
 import { getWeatherData, WeatherData } from '../../services/weatherService';
 import { TanifyLogo } from '../../assets';
+import { TimeOfDay } from '../../store/system/types';
+import LinearGradient from 'react-native-linear-gradient';
 import CircleView from '../../components/circleView';
 import UvIndex from '../../components/uvIndex';
-import { TimeOfDay } from '../../store/system/types';
 
 const SunScreen = () => {
     const [weatherData, setWeatherData] = useState<WeatherData>({
@@ -36,26 +37,23 @@ const SunScreen = () => {
     }, []);
 
     return (
-        <View
-            style={{
-                backgroundColor: (() => {
-                    switch (timeOfDay) {
-                        case TimeOfDay.Cloudy:
-                            return '#9e9e9e';
-                        case TimeOfDay.Sunrise:
-                            return '#fc63a1';
-                        case TimeOfDay.Day:
-                            return '#3d8bdd';
-                        case TimeOfDay.Sunset:
-                            return '#fc63a1';
-                        case TimeOfDay.Night:
-                            return '#2b2b2b';
-
-                        default:
-                            return '#9e9e9e';
-                    }
-                })(),
-            }}>
+        <LinearGradient
+            colors={(() => {
+                switch (timeOfDay) {
+                    case TimeOfDay.Cloudy:
+                        return ['#9e9e9e', '#9e9e9e'];
+                    case TimeOfDay.Sunrise:
+                        return ['#fc63a1', '#3d8bdd'];
+                    case TimeOfDay.Day:
+                        return ['#3d8bdd', '#3d8bdd'];
+                    case TimeOfDay.Sunset:
+                        return ['#fc63a1', '#edd937'];
+                    case TimeOfDay.Night:
+                        return ['#2b2b2b', '#2b2b2b'];
+                    default:
+                        return ['#9e9e9e', '#9e9e9e'];
+                }
+            })()}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 <View style={[{ height: windowHeight }, styles.mainContainer]}>
                     <View style={{ width: logoWidth }}>
@@ -110,7 +108,7 @@ const SunScreen = () => {
                     </Text>
                 </View>
             </ScrollView>
-        </View>
+        </LinearGradient>
     );
 };
 
