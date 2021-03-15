@@ -7,16 +7,19 @@ import {
     Image,
     Dimensions,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 import { getWeatherData, WeatherData } from '../../services/weatherService';
 import { TanifyLogo } from '../../assets';
 import CircleView from '../../components/circleView';
 import UvIndex from '../../components/uvIndex';
+import { TimeOfDay } from '../../store/system/types';
 
 const SunScreen = () => {
     const [weatherData, setWeatherData] = useState<WeatherData>({
         uvIndex: 0,
         temperature: undefined,
     });
+    const timeOfDay = useSelector((state) => state.system.timeOfDay);
     const windowHeight = Dimensions.get('window').height;
     const logoWidthHeightRatio = 2.729;
     const logoHeight = windowHeight * 0.17;
@@ -33,63 +36,85 @@ const SunScreen = () => {
     }, []);
 
     return (
-        <ScrollView
-            style={styles.scrollView}
-            contentContainerStyle={styles.contentContainer}>
-            <View style={[{ height: windowHeight }, styles.mainContainer]}>
-                <View style={{ width: logoWidth }}>
-                    <View
-                        style={[
-                            styles.tanifyLogoContainer,
-                            { height: logoHeight },
-                        ]}>
-                        <Image source={TanifyLogo} style={styles.tanifyLogo} />
+        <View
+            style={{
+                backgroundColor: (() => {
+                    switch (timeOfDay) {
+                        case TimeOfDay.Cloudy:
+                            return '#9e9e9e';
+                        case TimeOfDay.Sunrise:
+                            return '#fc63a1';
+                        case TimeOfDay.Day:
+                            return '#3d8bdd';
+                        case TimeOfDay.Sunset:
+                            return '#fc63a1';
+                        case TimeOfDay.Night:
+                            return '#2b2b2b';
+
+                        default:
+                            return '#9e9e9e';
+                    }
+                })(),
+            }}>
+            <ScrollView contentContainerStyle={styles.contentContainer}>
+                <View style={[{ height: windowHeight }, styles.mainContainer]}>
+                    <View style={{ width: logoWidth }}>
+                        <View
+                            style={[
+                                styles.tanifyLogoContainer,
+                                { height: logoHeight },
+                            ]}>
+                            <Image
+                                source={TanifyLogo}
+                                style={styles.tanifyLogo}
+                            />
+                        </View>
+                        <Text style={styles.temp}>
+                            {weatherData?.temperature >= 0 && '+'}
+                            {weatherData?.temperature}°C
+                        </Text>
                     </View>
-                    <Text style={styles.temp}>
-                        {weatherData?.temperature >= 0 && '+'}
-                        {weatherData?.temperature}°C
+
+                    <View style={styles.uv}>
+                        <UvIndex index={weatherData.uvIndex} />
+                    </View>
+                    <Text style={styles.slogan}>
+                        ‘Nothing interesting happens’
+                    </Text>
+                    <CircleView
+                        diameter={80}
+                        color={'#00cc7e'}
+                        style={styles.modeContainer}>
+                        <Text style={styles.mode}>SAFE</Text>
+                    </CircleView>
+                    <View style={styles.locationContainer}>
+                        <Text style={styles.location}>Tallinn, Estonia</Text>
+                    </View>
+                </View>
+
+                <View
+                    style={[{ height: windowHeight }, styles.secondContainer]}>
+                    <CircleView
+                        diameter={180}
+                        color={'#00cc7e'}
+                        style={styles.uvStickerContainerStyle}>
+                        <Text style={styles.uvStickerStyle}>UV 0</Text>
+                    </CircleView>
+                    <View style={styles.uvInfoBoxContainerStyle}>
+                        <Text style={styles.uvInfoBoxStyle}>SAFE</Text>
+                    </View>
+                    <Text style={styles.uvInfo}>
+                        The sun's not interested in giving you a tan. We know
+                        it's hard, but just go out and do something else that's
+                        not tanning. Go on a date? Sudoku? It's up to you.
                     </Text>
                 </View>
-
-                <View style={styles.uv}>
-                    <UvIndex index={weatherData.uvIndex} />
-                </View>
-                <Text style={styles.slogan}>‘Nothing interesting happens’</Text>
-                <CircleView
-                    diameter={80}
-                    color={'#00cc7e'}
-                    style={styles.modeContainer}>
-                    <Text style={styles.mode}>SAFE</Text>
-                </CircleView>
-                <View style={styles.locationContainer}>
-                    <Text style={styles.location}>Tallinn, Estonia</Text>
-                </View>
-            </View>
-
-            <View style={[{ height: windowHeight }, styles.secondContainer]}>
-                <CircleView
-                    diameter={180}
-                    color={'#00cc7e'}
-                    style={styles.uvStickerContainerStyle}>
-                    <Text style={styles.uvStickerStyle}>UV 0</Text>
-                </CircleView>
-                <View style={styles.uvInfoBoxContainerStyle}>
-                    <Text style={styles.uvInfoBoxStyle}>SAFE</Text>
-                </View>
-                <Text style={styles.uvInfo}>
-                    The sun's not interested in giving you a tan. We know it's
-                    hard, but just go out and do something else that's not
-                    tanning. Go on a date? Sudoku? It's up to you.
-                </Text>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    scrollView: {
-        backgroundColor: '#2b2b2b',
-    },
     mainContainer: {
         alignItems: 'center',
         paddingTop: '20%',

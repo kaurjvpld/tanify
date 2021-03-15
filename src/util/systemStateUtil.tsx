@@ -12,11 +12,11 @@ export const getTimeOfDay = async (currentTime: number) => {
     if (currentTime > duskEnd || currentTime < dawnStart) {
         return TimeOfDay.Night;
     } else if (currentTime > dawnStart && currentTime < dawnEnd) {
-        return TimeOfDay.SunRise;
+        return TimeOfDay.Sunrise;
     } else if (currentTime > dawnEnd && currentTime < duskStart) {
         return TimeOfDay.Day;
     } else if (currentTime > duskStart && currentTime < duskEnd) {
-        return TimeOfDay.SunSet;
+        return TimeOfDay.Sunset;
     }
 };
 

@@ -1,3 +1,4 @@
+import { TimeOfDay, Mode } from './types';
 import {
     SystemState,
     SystemActionTypes,
@@ -7,9 +8,9 @@ import {
 } from './types';
 
 const initialState: SystemState = {
-    mode: undefined,
+    mode: Mode.Safe,
     temperature: undefined,
-    timeOfDay: undefined,
+    timeOfDay: TimeOfDay.Cloudy,
 };
 
 const systemReducer: (

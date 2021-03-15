@@ -28,8 +28,8 @@ export type SystemActionTypes =
     | SetTimeOfDayAction;
 
 export enum TimeOfDay {
-    SunRise,
-    SunSet,
+    Sunrise,
+    Sunset,
     Day,
     Night,
     Cloudy,
