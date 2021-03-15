@@ -12,6 +12,7 @@ import { getWeatherData, WeatherData } from '../../services/weatherService';
 import { TanifyLogo } from '../../assets';
 import { TimeOfDay } from '../../store/system/types';
 import LinearGradient from 'react-native-linear-gradient';
+import RadialGradient from 'react-native-radial-gradient';
 import CircleView from '../../components/circleView';
 import UvIndex from '../../components/uvIndex';
 
@@ -22,6 +23,7 @@ const SunScreen = () => {
     });
     const timeOfDay = useSelector((state) => state.system.timeOfDay);
     const windowHeight = Dimensions.get('window').height;
+    const windowWidth = Dimensions.get('window').width;
     const logoWidthHeightRatio = 2.729;
     const logoHeight = windowHeight * 0.17;
     const logoWidth = logoHeight * logoWidthHeightRatio;
@@ -55,40 +57,59 @@ const SunScreen = () => {
                 }
             })()}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
-                <View style={[{ height: windowHeight }, styles.mainContainer]}>
-                    <View style={{ width: logoWidth }}>
-                        <View
-                            style={[
-                                styles.tanifyLogoContainer,
-                                { height: logoHeight },
-                            ]}>
-                            <Image
-                                source={TanifyLogo}
-                                style={styles.tanifyLogo}
-                            />
+                <RadialGradient
+                    style={{
+                        height: windowHeight,
+                        width: windowWidth,
+                    }}
+                    colors={
+                        timeOfDay === TimeOfDay.Day
+                            ? ['#3eb1dd', '#3d8bdd']
+                            : ['transparent', 'transparent']
+                    }
+                    stops={[0.4]}
+                    radius={200}>
+                    <View
+                        style={[
+                            { height: windowHeight },
+                            styles.mainContainer,
+                        ]}>
+                        <View style={{ width: logoWidth }}>
+                            <View
+                                style={[
+                                    styles.tanifyLogoContainer,
+                                    { height: logoHeight },
+                                ]}>
+                                <Image
+                                    source={TanifyLogo}
+                                    style={styles.tanifyLogo}
+                                />
+                            </View>
+                            <Text style={styles.temp}>
+                                {weatherData?.temperature >= 0 && '+'}
+                                {weatherData?.temperature}°C
+                            </Text>
                         </View>
-                        <Text style={styles.temp}>
-                            {weatherData?.temperature >= 0 && '+'}
-                            {weatherData?.temperature}°C
-                        </Text>
-                    </View>
 
-                    <View style={styles.uv}>
-                        <UvIndex index={weatherData.uvIndex} />
+                        <View style={styles.uv}>
+                            <UvIndex index={weatherData.uvIndex} />
+                        </View>
+                        <Text style={styles.slogan}>
+                            ‘Nothing interesting happens’
+                        </Text>
+                        <CircleView
+                            diameter={80}
+                            color={'#00cc7e'}
+                            style={styles.modeContainer}>
+                            <Text style={styles.mode}>SAFE</Text>
+                        </CircleView>
+                        <View style={styles.locationContainer}>
+                            <Text style={styles.location}>
+                                Tallinn, Estonia
+                            </Text>
+                        </View>
                     </View>
-                    <Text style={styles.slogan}>
-                        ‘Nothing interesting happens’
-                    </Text>
-                    <CircleView
-                        diameter={80}
-                        color={'#00cc7e'}
-                        style={styles.modeContainer}>
-                        <Text style={styles.mode}>SAFE</Text>
-                    </CircleView>
-                    <View style={styles.locationContainer}>
-                        <Text style={styles.location}>Tallinn, Estonia</Text>
-                    </View>
-                </View>
+                </RadialGradient>
 
                 <View
                     style={[{ height: windowHeight }, styles.secondContainer]}>
