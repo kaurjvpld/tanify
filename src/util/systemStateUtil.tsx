@@ -9,7 +9,7 @@ export const getTimeOfDay = async (currentTime: number) => {
     const duskEnd = duskAndDawn.dusk;
     const duskStart = getDuskStart(duskAndDawn.sunset, duskEnd);
 
-    if (currentTime > duskEnd && currentTime < dawnStart) {
+    if (currentTime > duskEnd || currentTime < dawnStart) {
         return TimeOfDay.Night;
     } else if (currentTime > dawnStart && currentTime < dawnEnd) {
         return TimeOfDay.SunRise;
