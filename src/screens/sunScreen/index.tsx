@@ -202,6 +202,7 @@ const styles = StyleSheet.create({
         width: 180,
         marginTop: 50,
         alignItems: 'center',
+        borderRadius: 3,
     },
     uvInfoBoxStyle: {
         fontFamily: 'EuclidCircularB-Bold',
