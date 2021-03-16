@@ -86,7 +86,7 @@ const SunScreen = () => {
                                 />
                             </View>
                             <Text style={styles.temp}>
-                                {weatherData?.temperature >= 0 && '+'}
+                                {weatherData?.temperature > 0 && '+'}
                                 {weatherData?.temperature}°C
                             </Text>
                         </View>
