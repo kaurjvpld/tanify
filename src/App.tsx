@@ -1,22 +1,27 @@
 import React, { useEffect } from 'react';
 import { PermissionsAndroid, Platform, Alert } from 'react-native';
 import { getWeatherData } from './services/weatherService';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     setTemperature,
     setTimeOfDay,
     setMode,
-    setLocation,
+    setCoordinates,
 } from './store/system/actions';
 import { getTimeOfDay, getMode } from './util/systemStateUtil';
-import { TimeOfDay, Mode } from './store/system/types';
-import { getUserLocation } from './util/mapUtil';
+import { TimeOfDay, Mode, Coordinates } from './store/system/types';
+import { getUserCoordinates } from './util/mapUtil';
+import Geocoder from 'react-native-geocoding';
 import SunScreen from './screens/sunScreen';
+import { configuration } from '../config';
+import axios from 'axios';
 
 declare const global: { HermesInternal: null | {} };
 
 const App = () => {
     const dispatch = useDispatch();
+    const location: Coordinates = useSelector((state) => state.system.location);
+    Geocoder.init(configuration.googleApiKey);
 
     useEffect(() => {
         (async () => {
@@ -49,13 +54,13 @@ const App = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        const setNewLocation = (location: Location) =>
-            dispatch(setLocation(location));
+        const setNewCoordinates = (newCoordinates: Coordinates) =>
+            dispatch(setCoordinates(newCoordinates));
 
         const getInitialRegion = async () => {
             try {
-                const userLocation = await getUserLocation();
-                setNewLocation(userLocation);
+                const userCoordinates = await getUserCoordinates();
+                setNewCoordinates(userCoordinates);
             } catch (error) {
                 console.log('ERROR: ' + error.message);
             }
@@ -63,6 +68,33 @@ const App = () => {
 
         getInitialRegion();
     }, [dispatch]);
+
+    useEffect(() => {
+        if (location) {
+            axios
+                .get('https://revgeocode.search.hereapi.com/v1/revgeocode', {
+                    params: {
+                        apiKey: configuration.hereApiKey,
+                        at: `${location.latitude},${location.longitude}`,
+                    },
+                })
+                .then((geocode) => {
+                    // const newCoordinates = {
+                    //     geocode?.data?.items[0]?.address
+                    // }
+                })
+                .catch((error) => {
+                    console.log('ERROR: ' + error.response.data.title);
+                });
+            // Geocoder.from(location.latitude, location.longitude)
+            //     .then((json) => {
+            //         var addressComponent =
+            //             json.results[0].address_components[0];
+            //         console.log(addressComponent);
+            //     })
+            //     .catch((error) => console.warn(error));
+        }
+    }, [location]);
 
     return <SunScreen />;
 };

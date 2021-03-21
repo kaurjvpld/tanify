@@ -18,7 +18,7 @@ export interface DuskAndDawn {
 
 export const getWeatherData: () => WeatherData = async () => {
     try {
-        let location = await getCurrentLocation();
+        let location = await getCurrentCoordinates();
         let weatherData = await axios.get(
             `https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=hourly,daily,minutely,alert&units=metric&appid=${OPEN_WEATHER_API_KEY}`,
         );
@@ -36,7 +36,7 @@ export const getWeatherData: () => WeatherData = async () => {
 };
 
 export const getDuskAndDawn: () => DuskAndDawn = async () => {
-    const location = await getCurrentLocation();
+    const location = await getCurrentCoordinates();
     const duskAndDawn = await axios.get(
         `https://api.sunrise-sunset.org/json?lat=${location.latitude}&lng=${location.longitude}&formatted=0`,
     );
@@ -51,16 +51,16 @@ export const getDuskAndDawn: () => DuskAndDawn = async () => {
     return result;
 };
 
-const getCurrentLocation = () => {
+const getCurrentCoordinates = () => {
     return new Promise((resolve, reject) => {
         Geolocation.getCurrentPosition(
             (position) => {
                 if (position) {
-                    const userLocation = {
+                    const userCoordinates = {
                         latitude: position.coords.latitude,
                         longitude: position.coords.longitude,
                     };
-                    resolve(userLocation);
+                    resolve(userCoordinates);
                 }
             },
             (error) => {

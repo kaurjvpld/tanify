@@ -9,7 +9,7 @@ export interface SystemState {
     mode: Mode | undefined;
     temperature: number | undefined;
     timeOfDay: TimeOfDay | undefined;
-    location: Location;
+    location: Coordinates;
 }
 
 export interface SetModeAction extends Action<typeof SET_MODE> {
@@ -24,15 +24,15 @@ export interface SetTimeOfDayAction extends Action<typeof SET_TIME_OF_DAY> {
     payload: TimeOfDay;
 }
 
-export interface SetLocationAction extends Action<typeof SET_LOCATION> {
-    payload: Location;
+export interface SetCoordinatesAction extends Action<typeof SET_LOCATION> {
+    payload: Coordinates;
 }
 
 export type SystemActionTypes =
     | SetModeAction
     | SetTemperatureAction
     | SetTimeOfDayAction
-    | SetLocationAction;
+    | SetCoordinatesAction;
 
 export enum TimeOfDay {
     Sunrise,
@@ -50,7 +50,7 @@ export enum Mode {
     Extreme = 'hard',
 }
 
-export interface Location {
+export interface Coordinates {
     latitude: string;
     longitude: string;
 }
