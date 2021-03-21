@@ -11,7 +11,6 @@ import {
 import { getTimeOfDay, getMode } from './util/systemStateUtil';
 import { TimeOfDay, Mode, Coordinates, Location } from './store/system/types';
 import { getUserCoordinates } from './util/mapUtil';
-import Geocoder from 'react-native-geocoding';
 import SunScreen from './screens/sunScreen';
 import { configuration } from '../config';
 import axios from 'axios';
@@ -24,7 +23,6 @@ const App = () => {
     const coordinates: Coordinates = useSelector(
         (state) => state.system.coordinates,
     );
-    Geocoder.init(configuration.googleApiKey);
 
     useEffect(() => {
         (async () => {
