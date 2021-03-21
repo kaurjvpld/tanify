@@ -9,12 +9,13 @@ import {
     setCoordinates,
 } from './store/system/actions';
 import { getTimeOfDay, getMode } from './util/systemStateUtil';
-import { TimeOfDay, Mode, Coordinates } from './store/system/types';
+import { TimeOfDay, Mode, Coordinates, Location } from './store/system/types';
 import { getUserCoordinates } from './util/mapUtil';
 import Geocoder from 'react-native-geocoding';
 import SunScreen from './screens/sunScreen';
 import { configuration } from '../config';
 import axios from 'axios';
+import { setLocation } from './store/system/actions';
 
 declare const global: { HermesInternal: null | {} };
 
@@ -72,31 +73,31 @@ const App = () => {
     }, [dispatch]);
 
     useEffect(() => {
+        const setNewLocation = (location: Location) =>
+            dispatch(setLocation(location));
+
         if (coordinates) {
             axios
                 .get('https://revgeocode.search.hereapi.com/v1/revgeocode', {
                     params: {
                         apiKey: configuration.hereApiKey,
                         at: `${coordinates.latitude},${coordinates.longitude}`,
+                        lang: 'en',
                     },
                 })
                 .then((geocode) => {
-                    // const newCoordinates = {
-                    //     geocode?.data?.items[0]?.address
-                    // }
+                    const newLocation: Location = {
+                        city: geocode?.data?.items[0]?.address?.city,
+                        country: geocode?.data?.items[0]?.address?.countryName,
+                    };
+
+                    setNewLocation(newLocation);
                 })
                 .catch((error) => {
                     console.log('ERROR: ' + error.response.data.title);
                 });
-            // Geocoder.from(coordinates.latitude, coordinates.longitude)
-            //     .then((json) => {
-            //         var addressComponent =
-            //             json.results[0].address_components[0];
-            //         console.log(addressComponent);
-            //     })
-            //     .catch((error) => console.warn(error));
         }
-    }, [coordinates]);
+    }, [coordinates, dispatch]);
 
     return <SunScreen />;
 };

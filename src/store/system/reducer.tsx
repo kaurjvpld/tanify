@@ -4,6 +4,7 @@ import {
     SET_MODE,
     SET_TEMPERATURE,
     SET_TIME_OF_DAY,
+    SET_COORDINATES,
     SET_LOCATION,
     TimeOfDay,
     Mode,
@@ -36,10 +37,15 @@ const systemReducer: (
                 ...state,
                 timeOfDay: action.payload,
             };
-        case SET_LOCATION:
+        case SET_COORDINATES:
             return {
                 ...state,
                 coordinates: action.payload,
+            };
+        case SET_LOCATION:
+            return {
+                ...state,
+                location: action.payload,
             };
         default:
             return state;

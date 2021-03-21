@@ -40,6 +40,7 @@ const SunScreen = () => {
     });
     const timeOfDay = useSelector((state) => state.system.timeOfDay);
     const mode = useSelector((state) => state.system.mode);
+    const location = useSelector((state) => state.system.location);
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
     const logoWidthHeightRatio = 2.729;
@@ -126,7 +127,7 @@ const SunScreen = () => {
                         </CircleView>
                         <View style={styles.locationContainer}>
                             <Text style={styles.location}>
-                                Tallinn, Estonia
+                                {location?.city}, {location?.country}
                             </Text>
                         </View>
                     </View>

@@ -1,4 +1,10 @@
-import { Mode, Coordinates, SET_LOCATION } from './types';
+import {
+    Mode,
+    Coordinates,
+    SET_COORDINATES,
+    Location,
+    SET_LOCATION,
+} from './types';
 import {
     SystemActionTypes,
     SET_MODE,
@@ -43,7 +49,18 @@ export const setCoordinates: (coordinates: Coordinates) => SystemActionTypes = (
     console.log('new coordinates: ' + JSON.stringify(coordinates, null, 2));
 
     return {
-        type: SET_LOCATION,
+        type: SET_COORDINATES,
         payload: coordinates,
+    };
+};
+
+export const setLocation: (location: Location) => SystemActionTypes = (
+    location,
+) => {
+    console.log('new location: ' + JSON.stringify(location, null, 2));
+
+    return {
+        type: SET_LOCATION,
+        payload: location,
     };
 };
