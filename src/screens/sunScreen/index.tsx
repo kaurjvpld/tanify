@@ -41,11 +41,29 @@ const SunScreen = () => {
     const timeOfDay = useSelector((state) => state.system.timeOfDay);
     const mode = useSelector((state) => state.system.mode);
     const location = useSelector((state) => state.system.location);
+
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
     const logoWidthHeightRatio = 2.729;
     const logoHeight = windowHeight * 0.17;
     const logoWidth = logoHeight * logoWidthHeightRatio;
+
+    const circeViewColor = (() => {
+        switch (mode) {
+            case Mode.Safe:
+                return '#00cc7e';
+            case Mode.Easy:
+                return '#ffce00';
+            case Mode.Medium:
+                return '#ff9700';
+            case Mode.Hard:
+                return '#ff5500';
+            case Mode.Extreme:
+                return '#6900ff';
+            default:
+                return '#00cc7e';
+        }
+    })();
 
     useEffect(() => {
         getWeatherData()
@@ -119,7 +137,7 @@ const SunScreen = () => {
                         </Text>
                         <CircleView
                             diameter={80}
-                            color={'#00cc7e'}
+                            color={circeViewColor}
                             style={styles.modeContainer}>
                             <Text style={styles.mode}>
                                 {I18n.t(`mode.${mode}.title`)}
@@ -137,7 +155,7 @@ const SunScreen = () => {
                     style={[{ height: windowHeight }, styles.secondContainer]}>
                     <CircleView
                         diameter={180}
-                        color={'#00cc7e'}
+                        color={circeViewColor}
                         style={styles.uvStickerContainerStyle}>
                         <Text style={styles.uvStickerStyle}>
                             UV {weatherData?.uvIndex}
