@@ -15,6 +15,23 @@ import LinearGradient from 'react-native-linear-gradient';
 import RadialGradient from 'react-native-radial-gradient';
 import CircleView from '../../components/circleView';
 import UvIndex from '../../components/uvIndex';
+import I18n from '../../i18n/index';
+
+const numbers = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+    'ten',
+    'eleven',
+    'twelve',
+];
 
 const SunScreen = () => {
     const [weatherData, setWeatherData] = useState<WeatherData>({
@@ -22,6 +39,7 @@ const SunScreen = () => {
         temperature: undefined,
     });
     const timeOfDay = useSelector((state) => state.system.timeOfDay);
+    const mode = useSelector((state) => state.system.mode);
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
     const logoWidthHeightRatio = 2.729;
@@ -95,13 +113,16 @@ const SunScreen = () => {
                             <UvIndex index={weatherData.uvIndex} />
                         </View>
                         <Text style={styles.slogan}>
-                            ‘Nothing interesting happens’
+                            ‘{I18n.t(`slogan.${numbers[weatherData?.uvIndex]}`)}
+                            ’
                         </Text>
                         <CircleView
                             diameter={80}
                             color={'#00cc7e'}
                             style={styles.modeContainer}>
-                            <Text style={styles.mode}>SAFE</Text>
+                            <Text style={styles.mode}>
+                                {I18n.t(`mode.${mode}.title`)}
+                            </Text>
                         </CircleView>
                         <View style={styles.locationContainer}>
                             <Text style={styles.location}>

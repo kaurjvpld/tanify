@@ -1,4 +1,4 @@
-import { Mode } from './types';
+import { Mode, Location, SET_LOCATION } from './types';
 import {
     SystemActionTypes,
     SET_MODE,
@@ -34,5 +34,16 @@ export const setTimeOfDay: (timeOfDay: TimeOfDay) => SystemActionTypes = (
     return {
         type: SET_TIME_OF_DAY,
         payload: timeOfDay,
+    };
+};
+
+export const setLocation: (location: Location) => SystemActionTypes = (
+    location,
+) => {
+    console.log('new location: ' + JSON.stringify(location, null, 2));
+
+    return {
+        type: SET_LOCATION,
+        payload: location,
     };
 };

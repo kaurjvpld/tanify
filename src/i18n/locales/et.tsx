@@ -21,7 +21,7 @@ export default {
     mode: {
         safe: {
             uv: 'UV 0-2',
-            title: 'Safe mode',
+            title: 'SAFE',
             info:
                 "The sun's not interested in giving you a tan. We know it's hard, but just go out and do something else that's not tanning. Go on a date? Sudoku? It's up to you.",
             beginnersGuide: '',
@@ -29,7 +29,7 @@ export default {
         },
         easy: {
             uv: 'UV 3-5',
-            title: 'Easy mode',
+            title: 'EASY',
             info: 'Be sure to grab some rays between 11am and 4pm.',
             beginnersGuide:
                 "Use at least SPF30+ sunscreen. Also it wouldn't hurt to wear a hat and sunglasses, like a groovy Bond villain on a holiday.",
@@ -38,7 +38,7 @@ export default {
         },
         medium: {
             uv: 'UV 6-7',
-            title: 'Medium mode',
+            title: 'MEDIUM',
             info: "The sun's in full swing between 11am and 4pm",
             beginnersGuide:
                 "The sun's looking for you: best to lay low in the shade and cover yourself with SPF 50+. Wear a hat, a shirt and sunglasses for ultimate disguise.",
@@ -47,7 +47,7 @@ export default {
         },
         hard: {
             uv: 'UV 8-10',
-            title: 'Hard mode',
+            title: 'HARD',
             info: "The sun's not playing around between 11am and 4pm.",
             beginnersGuide:
                 "It's time to battle and sunscreen is your armour. If possible, cannonball into a barrel of SPF 50+. Avoid staying under the sun without any protection.",
@@ -56,7 +56,7 @@ export default {
         },
         extreme: {
             uv: 'UV 11+',
-            title: 'Extreme mode',
+            title: 'EXTREME',
             info: 'The sun is extremely intense between 11am-4pm',
             beginnersGuide:
                 "Avoid the sun like the medieval plague! Seriously, don't let the sun touch you - wear light clothes that cover  your skin. Also drouse yourself with SPF 50+.",

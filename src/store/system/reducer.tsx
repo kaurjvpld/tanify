@@ -1,16 +1,19 @@
-import { TimeOfDay, Mode } from './types';
 import {
     SystemState,
     SystemActionTypes,
     SET_MODE,
     SET_TEMPERATURE,
     SET_TIME_OF_DAY,
+    SET_LOCATION,
+    TimeOfDay,
+    Mode,
 } from './types';
 
 const initialState: SystemState = {
     mode: Mode.Safe,
     temperature: undefined,
     timeOfDay: TimeOfDay.Cloudy,
+    location: undefined,
 };
 
 const systemReducer: (
@@ -32,6 +35,11 @@ const systemReducer: (
             return {
                 ...state,
                 timeOfDay: action.payload,
+            };
+        case SET_LOCATION:
+            return {
+                ...state,
+                location: action.payload,
             };
         default:
             return state;

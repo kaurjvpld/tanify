@@ -2,9 +2,15 @@ import React, { useEffect } from 'react';
 import { PermissionsAndroid, Platform, Alert } from 'react-native';
 import { getWeatherData } from './services/weatherService';
 import { useDispatch } from 'react-redux';
-import { setTemperature, setTimeOfDay, setMode } from './store/system/actions';
+import {
+    setTemperature,
+    setTimeOfDay,
+    setMode,
+    setLocation,
+} from './store/system/actions';
 import { getTimeOfDay, getMode } from './util/systemStateUtil';
 import { TimeOfDay, Mode } from './store/system/types';
+import { getUserLocation } from './util/mapUtil';
 import SunScreen from './screens/sunScreen';
 
 declare const global: { HermesInternal: null | {} };
@@ -42,11 +48,23 @@ const App = () => {
             });
     }, [dispatch]);
 
-    return (
-        <>
-            <SunScreen />
-        </>
-    );
+    useEffect(() => {
+        const setNewLocation = (location: Location) =>
+            dispatch(setLocation(location));
+
+        const getInitialRegion = async () => {
+            try {
+                const userLocation = await getUserLocation();
+                setNewLocation(userLocation);
+            } catch (error) {
+                console.log('ERROR: ' + error.message);
+            }
+        };
+
+        getInitialRegion();
+    }, [dispatch]);
+
+    return <SunScreen />;
 };
 
 export default App;
