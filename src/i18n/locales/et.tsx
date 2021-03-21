@@ -56,7 +56,7 @@ export default {
         },
         extreme: {
             uv: 'UV 11+',
-            title: 'EXTREME',
+            title: 'XTREME',
             info: 'The sun is extremely intense between 11am-4pm',
             beginnersGuide:
                 "Avoid the sun like the medieval plague! Seriously, don't let the sun touch you - wear light clothes that cover  your skin. Also drouse yourself with SPF 50+.",

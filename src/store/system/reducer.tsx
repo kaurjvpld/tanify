@@ -15,6 +15,7 @@ const initialState: SystemState = {
     temperature: undefined,
     timeOfDay: TimeOfDay.Cloudy,
     coordinates: undefined,
+    location: undefined,
 };
 
 const systemReducer: (

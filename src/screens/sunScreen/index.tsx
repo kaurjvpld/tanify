@@ -10,7 +10,7 @@ import {
 import { useSelector } from 'react-redux';
 import { getWeatherData, WeatherData } from '../../services/weatherService';
 import { TanifyLogo } from '../../assets';
-import { TimeOfDay } from '../../store/system/types';
+import { TimeOfDay, Mode } from '../../store/system/types';
 import LinearGradient from 'react-native-linear-gradient';
 import RadialGradient from 'react-native-radial-gradient';
 import CircleView from '../../components/circleView';
@@ -139,16 +139,34 @@ const SunScreen = () => {
                         diameter={180}
                         color={'#00cc7e'}
                         style={styles.uvStickerContainerStyle}>
-                        <Text style={styles.uvStickerStyle}>UV 0</Text>
+                        <Text style={styles.uvStickerStyle}>
+                            UV {weatherData?.uvIndex}
+                        </Text>
                     </CircleView>
                     <View style={styles.uvInfoBoxContainerStyle}>
-                        <Text style={styles.uvInfoBoxStyle}>SAFE</Text>
+                        <Text style={styles.uvInfoBoxStyle}>
+                            {I18n.t(`mode.${mode}.title`)}
+                        </Text>
                     </View>
                     <Text style={styles.uvInfo}>
-                        The sun's not interested in giving you a tan. We know
-                        it's hard, but just go out and do something else that's
-                        not tanning. Go on a date? Sudoku? It's up to you.
+                        {I18n.t(`mode.${mode}.info`)}
                     </Text>
+                    {mode && mode !== Mode.Safe && (
+                        <>
+                            <Text style={styles.guideTitle}>
+                                {I18n.t('general.beginnersGuide')}
+                            </Text>
+                            <Text style={styles.guideInfo}>
+                                {I18n.t(`mode.${mode}.beginnersGuide`)}
+                            </Text>
+                            <Text style={styles.guideTitle}>
+                                {I18n.t('general.tanhuntersGuide')}
+                            </Text>
+                            <Text style={styles.guideInfo}>
+                                {I18n.t(`mode.${mode}.tanhuntersGuide`)}
+                            </Text>
+                        </>
+                    )}
                 </View>
             </ScrollView>
         </LinearGradient>
@@ -234,8 +252,20 @@ const styles = StyleSheet.create({
         color: 'white',
         marginTop: 50,
         fontSize: 23,
-        marginBottom: 180,
         fontFamily: 'EuclidCircularB-Regular',
+        alignSelf: 'flex-start',
+    },
+    guideTitle: {
+        color: 'white',
+        alignSelf: 'flex-start',
+        fontFamily: 'EuclidCircularB-Bold',
+        marginTop: 10,
+    },
+    guideInfo: {
+        color: 'white',
+        alignSelf: 'flex-start',
+        fontFamily: 'EuclidCircularB-Regular',
+        marginTop: 5,
     },
 });
 

@@ -54,7 +54,7 @@ export enum Mode {
     Easy = 'easy',
     Medium = 'medium',
     Hard = 'hard',
-    Extreme = 'hard',
+    Extreme = 'extreme',
 }
 
 export interface Coordinates {
