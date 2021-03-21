@@ -7,12 +7,12 @@ export const getUserCoordinates = () => {
             if (granted) {
                 Geolocation.getCurrentPosition(
                     (position) => {
-                        const location = {
+                        const coordinates = {
                             latitude: position.coords.latitude,
                             longitude: position.coords.longitude,
                         };
 
-                        resolve(location);
+                        resolve(coordinates);
                     },
                     (error) => {
                         reject(error);

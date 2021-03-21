@@ -37,13 +37,13 @@ export const setTimeOfDay: (timeOfDay: TimeOfDay) => SystemActionTypes = (
     };
 };
 
-export const setCoordinates: (location: Coordinates) => SystemActionTypes = (
-    location,
+export const setCoordinates: (coordinates: Coordinates) => SystemActionTypes = (
+    coordinates,
 ) => {
-    console.log('new location: ' + JSON.stringify(location, null, 2));
+    console.log('new coordinates: ' + JSON.stringify(coordinates, null, 2));
 
     return {
         type: SET_LOCATION,
-        payload: location,
+        payload: coordinates,
     };
 };

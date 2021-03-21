@@ -9,7 +9,7 @@ export interface SystemState {
     mode: Mode | undefined;
     temperature: number | undefined;
     timeOfDay: TimeOfDay | undefined;
-    location: Coordinates;
+    coordinates: Coordinates;
 }
 
 export interface SetModeAction extends Action<typeof SET_MODE> {

@@ -20,7 +20,9 @@ declare const global: { HermesInternal: null | {} };
 
 const App = () => {
     const dispatch = useDispatch();
-    const location: Coordinates = useSelector((state) => state.system.location);
+    const coordinates: Coordinates = useSelector(
+        (state) => state.system.coordinates,
+    );
     Geocoder.init(configuration.googleApiKey);
 
     useEffect(() => {
@@ -70,12 +72,12 @@ const App = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (location) {
+        if (coordinates) {
             axios
                 .get('https://revgeocode.search.hereapi.com/v1/revgeocode', {
                     params: {
                         apiKey: configuration.hereApiKey,
-                        at: `${location.latitude},${location.longitude}`,
+                        at: `${coordinates.latitude},${coordinates.longitude}`,
                     },
                 })
                 .then((geocode) => {
@@ -86,7 +88,7 @@ const App = () => {
                 .catch((error) => {
                     console.log('ERROR: ' + error.response.data.title);
                 });
-            // Geocoder.from(location.latitude, location.longitude)
+            // Geocoder.from(coordinates.latitude, coordinates.longitude)
             //     .then((json) => {
             //         var addressComponent =
             //             json.results[0].address_components[0];
@@ -94,7 +96,7 @@ const App = () => {
             //     })
             //     .catch((error) => console.warn(error));
         }
-    }, [location]);
+    }, [coordinates]);
 
     return <SunScreen />;
 };

@@ -18,9 +18,9 @@ export interface DuskAndDawn {
 
 export const getWeatherData: () => WeatherData = async () => {
     try {
-        let location = await getCurrentCoordinates();
+        let coordinates = await getCurrentCoordinates();
         let weatherData = await axios.get(
-            `https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=hourly,daily,minutely,alert&units=metric&appid=${OPEN_WEATHER_API_KEY}`,
+            `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.latitude}&lon=${coordinates.longitude}&exclude=hourly,daily,minutely,alert&units=metric&appid=${OPEN_WEATHER_API_KEY}`,
         );
 
         let result = {
@@ -36,9 +36,9 @@ export const getWeatherData: () => WeatherData = async () => {
 };
 
 export const getDuskAndDawn: () => DuskAndDawn = async () => {
-    const location = await getCurrentCoordinates();
+    const coordinates = await getCurrentCoordinates();
     const duskAndDawn = await axios.get(
-        `https://api.sunrise-sunset.org/json?lat=${location.latitude}&lng=${location.longitude}&formatted=0`,
+        `https://api.sunrise-sunset.org/json?lat=${coordinates.latitude}&lng=${coordinates.longitude}&formatted=0`,
     );
 
     const result = {

@@ -13,7 +13,7 @@ const initialState: SystemState = {
     mode: Mode.Safe,
     temperature: undefined,
     timeOfDay: TimeOfDay.Cloudy,
-    location: undefined,
+    coordinates: undefined,
 };
 
 const systemReducer: (
@@ -39,7 +39,7 @@ const systemReducer: (
         case SET_LOCATION:
             return {
                 ...state,
-                location: action.payload,
+                coordinates: action.payload,
             };
         default:
             return state;
