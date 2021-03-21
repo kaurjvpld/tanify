@@ -20,7 +20,6 @@ export default {
     },
     mode: {
         safe: {
-            uv: 'UV 0-2',
             title: 'SAFE',
             info:
                 "The sun's not interested in giving you a tan. We know it's hard, but just go out and do something else that's not tanning. Go on a date? Sudoku? It's up to you.",
@@ -28,7 +27,6 @@ export default {
             tanhuntersGuide: '',
         },
         easy: {
-            uv: 'UV 3-5',
             title: 'EASY',
             info: 'Be sure to grab some rays between 11am and 4pm.',
             beginnersGuide:
@@ -37,7 +35,6 @@ export default {
                 'Not really quenching your thirst for a proper "browning" session? Put on some of that intensifier - we know you carry it with you 24/7.',
         },
         medium: {
-            uv: 'UV 6-7',
             title: 'MEDIUM',
             info: "The sun's in full swing between 11am and 4pm",
             beginnersGuide:
@@ -46,7 +43,6 @@ export default {
                 "It's your time to shine! While you're busy taking IG snaps of your mega-dope tanning sesh, find the time to put on some SPF 15+.",
         },
         hard: {
-            uv: 'UV 8-10',
             title: 'HARD',
             info: "The sun's not playing around between 11am and 4pm.",
             beginnersGuide:
@@ -55,7 +51,6 @@ export default {
                 "It's like safe sex: enjoy the ride, but always use protection! In this case apply some SPF 30+ to avoid catching any burns.",
         },
         extreme: {
-            uv: 'UV 11+',
             title: 'XTREME',
             info: 'The sun is extremely intense between 11am-4pm',
             beginnersGuide:
