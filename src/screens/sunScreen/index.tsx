@@ -65,6 +65,23 @@ const SunScreen = () => {
         }
     })();
 
+    const gradientColors = (() => {
+        switch (timeOfDay) {
+            case TimeOfDay.Cloudy:
+                return ['#9e9e9e', '#9e9e9e'];
+            case TimeOfDay.Sunrise:
+                return ['#fc63a1', '#3d8bdd'];
+            case TimeOfDay.Day:
+                return ['#3d8bdd', '#3d8bdd'];
+            case TimeOfDay.Sunset:
+                return ['#fc63a1', '#edd937'];
+            case TimeOfDay.Night:
+                return ['#2b2b2b', '#2b2b2b'];
+            default:
+                return ['#9e9e9e', '#9e9e9e'];
+        }
+    })();
+
     useEffect(() => {
         getWeatherData()
             .then((data) => {
@@ -76,23 +93,7 @@ const SunScreen = () => {
     }, []);
 
     return (
-        <LinearGradient
-            colors={(() => {
-                switch (timeOfDay) {
-                    case TimeOfDay.Cloudy:
-                        return ['#9e9e9e', '#9e9e9e'];
-                    case TimeOfDay.Sunrise:
-                        return ['#fc63a1', '#3d8bdd'];
-                    case TimeOfDay.Day:
-                        return ['#3d8bdd', '#3d8bdd'];
-                    case TimeOfDay.Sunset:
-                        return ['#fc63a1', '#edd937'];
-                    case TimeOfDay.Night:
-                        return ['#2b2b2b', '#2b2b2b'];
-                    default:
-                        return ['#9e9e9e', '#9e9e9e'];
-                }
-            })()}>
+        <LinearGradient colors={gradientColors}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 <RadialGradient
                     style={{
