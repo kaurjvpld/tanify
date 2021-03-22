@@ -11,10 +11,11 @@ import {
 import { getTimeOfDay, getMode } from './util/systemStateUtil';
 import { TimeOfDay, Mode, Coordinates, Location } from './store/system/types';
 import { getUserCoordinates } from './util/mapUtil';
-import SunScreen from './screens/sunScreen';
 import { configuration } from '../config';
-import axios from 'axios';
 import { setLocation } from './store/system/actions';
+import SplashScreen from 'react-native-splash-screen';
+import SunScreen from './screens/sunScreen';
+import axios from 'axios';
 
 declare const global: { HermesInternal: null | {} };
 
@@ -46,6 +47,7 @@ const App = () => {
                 setNewTemperature(data?.temperature);
                 getTimeOfDay(data?.timeOfMeasure).then((timeOfDay) => {
                     setNewTimeOfDay(timeOfDay);
+                    SplashScreen.hide();
                 });
                 setNewMode(getMode(data?.uvIndex));
             })
