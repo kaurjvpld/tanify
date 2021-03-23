@@ -1,4 +1,4 @@
-import { SET_TIME_OF_MEASURE } from './types';
+import { SET_TIME_OF_MEASURE, SET_APP_STATE } from './types';
 import {
     SystemState,
     SystemActionTypes,
@@ -61,6 +61,11 @@ const systemReducer: (
             return {
                 ...state,
                 timeOfMeasure: action.payload,
+            };
+        case SET_APP_STATE:
+            return {
+                ...state,
+                appState: action.payload,
             };
         default:
             return state;

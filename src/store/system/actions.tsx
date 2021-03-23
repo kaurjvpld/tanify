@@ -10,6 +10,7 @@ import {
     Location,
     SET_LOCATION,
     SET_TIME_OF_MEASURE,
+    SET_APP_STATE,
 } from './types';
 
 export const setMode: (mode: Mode) => SystemActionTypes = (mode) => {
@@ -82,5 +83,15 @@ export const setLocation: (location: Location) => SystemActionTypes = (
     return {
         type: SET_LOCATION,
         payload: location,
+    };
+};
+
+export const setAppState: (appState: string) => SystemActionTypes = (
+    appState,
+) => {
+    console.log(`app state changed to '${appState}'`);
+    return {
+        type: SET_APP_STATE,
+        payload: appState,
     };
 };
