@@ -1,15 +1,15 @@
 import {
+    SystemActionTypes,
+    SET_MODE,
+    SET_TIME_OF_DAY,
+    SET_TEMPERATURE,
+    SET_UV,
     Mode,
     Coordinates,
     SET_COORDINATES,
     Location,
     SET_LOCATION,
-} from './types';
-import {
-    SystemActionTypes,
-    SET_MODE,
-    SET_TIME_OF_DAY,
-    SET_TEMPERATURE,
+    SET_TIME_OF_MEASURE,
 } from './types';
 
 export const setMode: (mode: Mode) => SystemActionTypes = (mode) => {
@@ -29,6 +29,26 @@ export const setTemperature: (temperature: string) => SystemActionTypes = (
     return {
         type: SET_TEMPERATURE,
         payload: temperature,
+    };
+};
+
+export const setUv: (uv: number) => SystemActionTypes = (uv) => {
+    console.log('new UV index: ' + uv);
+
+    return {
+        type: SET_UV,
+        payload: uv,
+    };
+};
+
+export const setTimeOfMeasure: (timeOfMeasure: string) => SystemActionTypes = (
+    timeOfMeasure,
+) => {
+    console.log('new time of measure: ' + timeOfMeasure);
+
+    return {
+        type: SET_TIME_OF_MEASURE,
+        payload: timeOfMeasure,
     };
 };
 

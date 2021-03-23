@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
     Text,
     StyleSheet,
@@ -8,7 +8,6 @@ import {
     Dimensions,
 } from 'react-native';
 import { useSelector } from 'react-redux';
-import { getWeatherData, WeatherData } from '../../services/weatherService';
 import { TanifyLogo } from '../../assets';
 import { TimeOfDay, Mode } from '../../store/system/types';
 import LinearGradient from 'react-native-linear-gradient';
@@ -34,13 +33,11 @@ const numbers = [
 ];
 
 const SunScreen = () => {
-    const [weatherData, setWeatherData] = useState<WeatherData>({
-        uvIndex: 0,
-        temperature: undefined,
-    });
     const timeOfDay = useSelector((state) => state.system.timeOfDay);
     const mode = useSelector((state) => state.system.mode);
     const location = useSelector((state) => state.system.location);
+    const uv = useSelector((state) => state.system.uv);
+    const temperature = useSelector((state) => state.system.temperature);
 
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
@@ -82,16 +79,6 @@ const SunScreen = () => {
         }
     })();
 
-    useEffect(() => {
-        getWeatherData()
-            .then((data) => {
-                setWeatherData(data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
-
     return (
         <LinearGradient colors={gradientColors}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -124,17 +111,16 @@ const SunScreen = () => {
                                 />
                             </View>
                             <Text style={styles.temp}>
-                                {weatherData?.temperature > 0 && '+'}
-                                {weatherData?.temperature}°C
+                                {temperature > 0 && '+'}
+                                {temperature}°C
                             </Text>
                         </View>
 
                         <View style={styles.uv}>
-                            <UvIndex index={weatherData.uvIndex} />
+                            <UvIndex index={uv} />
                         </View>
                         <Text style={styles.slogan}>
-                            ‘{I18n.t(`slogan.${numbers[weatherData?.uvIndex]}`)}
-                            ’
+                            ‘{I18n.t(`slogan.${numbers[uv]}`)}’
                         </Text>
                         <CircleView
                             diameter={80}
@@ -158,9 +144,7 @@ const SunScreen = () => {
                         diameter={180}
                         color={circeViewColor}
                         style={styles.uvStickerContainerStyle}>
-                        <Text style={styles.uvStickerStyle}>
-                            UV {weatherData?.uvIndex}
-                        </Text>
+                        <Text style={styles.uvStickerStyle}>UV {uv}</Text>
                     </CircleView>
                     <View style={styles.uvInfoBoxContainerStyle}>
                         <Text style={styles.uvInfoBoxStyle}>

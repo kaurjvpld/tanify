@@ -1,3 +1,4 @@
+import { SET_TIME_OF_MEASURE } from './types';
 import {
     SystemState,
     SystemActionTypes,
@@ -6,6 +7,7 @@ import {
     SET_TIME_OF_DAY,
     SET_COORDINATES,
     SET_LOCATION,
+    SET_UV,
     TimeOfDay,
     Mode,
 } from './types';
@@ -13,6 +15,8 @@ import {
 const initialState: SystemState = {
     mode: Mode.Safe,
     temperature: undefined,
+    uv: undefined,
+    timeOfMeasure: undefined,
     timeOfDay: TimeOfDay.Cloudy,
     coordinates: undefined,
     location: undefined,
@@ -47,6 +51,16 @@ const systemReducer: (
             return {
                 ...state,
                 location: action.payload,
+            };
+        case SET_UV:
+            return {
+                ...state,
+                uv: action.payload,
+            };
+        case SET_TIME_OF_MEASURE:
+            return {
+                ...state,
+                timeOfMeasure: action.payload,
             };
         default:
             return state;

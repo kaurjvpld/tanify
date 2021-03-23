@@ -1,8 +1,11 @@
 import { getDuskAndDawn, DuskAndDawn } from '../services/weatherService';
-import { TimeOfDay, Mode } from '../store/system/types';
+import { TimeOfDay, Mode, Coordinates } from '../store/system/types';
 
-export const getTimeOfDay = async (currentTime: number) => {
-    const duskAndDawn: DuskAndDawn = await getDuskAndDawn();
+export const getTimeOfDay = async (
+    currentTime: number,
+    coordinates: Coordinates,
+) => {
+    const duskAndDawn: DuskAndDawn = await getDuskAndDawn(coordinates);
 
     const dawnStart = duskAndDawn.dawn;
     const dawnEnd = getDawnEnd(duskAndDawn.sunrise, dawnStart);

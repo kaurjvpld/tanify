@@ -1,5 +1,5 @@
-import Geolocation from '@react-native-community/geolocation';
 import axios from 'axios';
+import { Coordinates } from '../store/system/types';
 
 const OPEN_WEATHER_API_KEY = 'eb9591c25fb1327202a280c91d7c4d9c';
 
@@ -16,9 +16,10 @@ export interface DuskAndDawn {
     dusk: string;
 }
 
-export const getWeatherData: () => WeatherData = async () => {
+export const getWeatherData: (coordinates: Coordinates) => WeatherData = async (
+    coordinates,
+) => {
     try {
-        let coordinates = await getCurrentCoordinates();
         let weatherData = await axios.get(
             `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.latitude}&lon=${coordinates.longitude}&exclude=hourly,daily,minutely,alert&units=metric&appid=${OPEN_WEATHER_API_KEY}`,
         );
@@ -35,8 +36,9 @@ export const getWeatherData: () => WeatherData = async () => {
     }
 };
 
-export const getDuskAndDawn: () => DuskAndDawn = async () => {
-    const coordinates = await getCurrentCoordinates();
+export const getDuskAndDawn: (coordinates: Coordinates) => DuskAndDawn = async (
+    coordinates,
+) => {
     const duskAndDawn = await axios.get(
         `https://api.sunrise-sunset.org/json?lat=${coordinates.latitude}&lng=${coordinates.longitude}&formatted=0`,
     );
@@ -49,24 +51,4 @@ export const getDuskAndDawn: () => DuskAndDawn = async () => {
     };
 
     return result;
-};
-
-const getCurrentCoordinates = () => {
-    return new Promise((resolve, reject) => {
-        Geolocation.getCurrentPosition(
-            (position) => {
-                if (position) {
-                    const userCoordinates = {
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
-                    };
-                    resolve(userCoordinates);
-                }
-            },
-            (error) => {
-                reject(error);
-            },
-            { enableHighAccuracy: false, timeout: 5000, maximumAge: 600000 },
-        );
-    });
 };
