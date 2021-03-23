@@ -13,11 +13,7 @@ const useCoordinates = () => {
         const getCoordinates = async () => {
             try {
                 const userCoordinates = await getUserCoordinates();
-                const fakeCoordinates = {
-                    latitude: 15.861038,
-                    longitude: -97.084703,
-                };
-                setNewCoordinates(fakeCoordinates);
+                setNewCoordinates(userCoordinates);
             } catch (error) {
                 console.log('ERROR: ' + error.message);
             }
