@@ -79,6 +79,23 @@ const SunScreen = () => {
         }
     })();
 
+    const textColor = (() => {
+        switch (timeOfDay) {
+            case TimeOfDay.Cloudy:
+                return '#9e9e9e';
+            case TimeOfDay.Sunrise:
+                return '#3d8bdd';
+            case TimeOfDay.Day:
+                return '#3d8bdd';
+            case TimeOfDay.Sunset:
+                return '#edd937';
+            case TimeOfDay.Night:
+                return '#2b2b2b';
+            default:
+                return '#9e9e9e';
+        }
+    })();
+
     return (
         <LinearGradient colors={gradientColors}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -126,12 +143,13 @@ const SunScreen = () => {
                             diameter={80}
                             color={circeViewColor}
                             style={styles.modeContainer}>
-                            <Text style={styles.mode}>
+                            <Text style={[styles.mode, { color: textColor }]}>
                                 {I18n.t(`mode.${mode}.title`)}
                             </Text>
                         </CircleView>
                         <View style={styles.locationContainer}>
-                            <Text style={styles.location}>
+                            <Text
+                                style={[styles.location, { color: textColor }]}>
                                 {location?.city}, {location?.country}
                             </Text>
                         </View>
