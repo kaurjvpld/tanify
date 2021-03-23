@@ -688,6 +688,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = tanify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -712,6 +713,7 @@
 				DEVELOPMENT_TEAM = LKG6WX89V3;
 				INFOPLIST_FILE = tanify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
