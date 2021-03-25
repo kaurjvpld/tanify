@@ -1,4 +1,5 @@
 export const TanifyLogo = require('./tanify.png');
+export const Splash = require('./splash.png');
 export const Zero = require('./numbers/0.png');
 export const One = require('./numbers/1.png');
 export const Two = require('./numbers/2.png');

@@ -4,16 +4,17 @@ import { setTimeOfMeasure } from '../store/system/actions';
 import { Alert } from 'react-native';
 import { getWeatherData } from '../services/weatherService';
 import { getTimeOfDay, getMode } from '../util/systemStateUtil';
+import { useNavigation } from '@react-navigation/native';
 import {
     setTemperature,
     setTimeOfDay,
     setMode,
     setUv,
 } from '../store/system/actions';
-import SplashScreen from 'react-native-splash-screen';
 
 const useWeatherData = () => {
     const dispatch = useDispatch();
+    const navigation = useNavigation();
     const coordinates: Coordinates = useSelector(
         (state) => state.system.coordinates,
     );
@@ -49,10 +50,10 @@ const useWeatherData = () => {
         if (timeOfMeasure && coordinates) {
             getTimeOfDay(timeOfMeasure, coordinates).then((timeOfDay) => {
                 setNewTimeOfDay(timeOfDay);
-                SplashScreen.hide();
+                navigation.replace('SunScreen');
             });
         }
-    }, [dispatch, coordinates, timeOfMeasure]);
+    }, [dispatch, coordinates, timeOfMeasure, navigation]);
 
     useEffect(() => {
         const setNewMode = (mode: Mode) => dispatch(setMode(mode));
