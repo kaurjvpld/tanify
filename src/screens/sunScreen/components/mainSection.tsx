@@ -18,6 +18,7 @@ import CircleView from '../../../components/circleView';
 import RadialGradient from 'react-native-radial-gradient';
 
 const logoWidthHeightRatio = 2.729;
+const logoHeightPercentage = 14;
 
 const MainSection = () => {
     const temperature = useSelector((state) => state.system.temperature);
@@ -50,7 +51,7 @@ const MainSection = () => {
                     ‘{I18n.t(`slogan.${numbers[uv]}`)}’
                 </Text>
                 <CircleView
-                    diameter={80}
+                    diameter={hp('10%')}
                     color={circleViewColor(mode)}
                     style={styles.modeContainer}>
                     <Text
@@ -75,18 +76,18 @@ const MainSection = () => {
 export default MainSection;
 
 const styles = StyleSheet.create({
-    container: {
-        height: hp('100%'),
-        alignItems: 'center',
-        paddingTop: '20%',
-        paddingHorizontal: 30,
-    },
     radialGradient: {
         height: hp('100%'),
         width: wp('100%'),
     },
+    container: {
+        height: hp('100%'),
+        alignItems: 'center',
+        paddingTop: hp('10%'),
+        paddingHorizontal: wp('6%'),
+    },
     tanifyLogoContainer: {
-        height: hp('17%'),
+        height: hp(logoHeightPercentage),
         width: '100%',
     },
     tanifyLogo: {
@@ -96,38 +97,38 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     tempContainer: {
-        width: hp('17%') * logoWidthHeightRatio,
+        width: hp(logoHeightPercentage) * logoWidthHeightRatio,
     },
     temp: {
         color: '#FFFFFF',
         fontSize: hp('3.5%'),
         fontFamily: 'EuclidCircularB-Bold',
         alignSelf: 'flex-end',
-        marginTop: 2,
+        marginTop: hp('0.3%'),
     },
     uv: {
-        marginTop: '8%',
-        height: '30%',
+        marginTop: hp('7%'),
+        height: hp('28%'),
         width: '100%',
     },
     slogan: {
         color: 'white',
-        marginTop: '10%',
+        marginTop: hp('5%'),
         fontSize: hp('3%'),
         fontFamily: 'EuclidCircularB-BoldItalic',
     },
     mode: {
         fontFamily: 'EuclidCircularB-Bold',
-        fontSize: 18,
+        fontSize: hp('3%'),
     },
     modeContainer: {
-        marginTop: '5%',
+        marginTop: hp('1.5%'),
     },
     locationContainer: {
         backgroundColor: 'white',
         paddingHorizontal: 15,
         paddingVertical: 8,
-        marginTop: '7%',
+        marginTop: hp('2%'),
         borderRadius: 3,
     },
     location: {
