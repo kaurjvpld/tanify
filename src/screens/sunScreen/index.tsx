@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, SafeAreaView, StatusBar } from 'react-native';
 import { gradientColors } from '../../util/colorUtil';
 import { useSelector } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
@@ -11,10 +11,13 @@ const SunScreen = () => {
 
     return (
         <LinearGradient colors={gradientColors(timeOfDay)}>
-            <ScrollView>
-                <MainSection />
-                <InfoSection />
-            </ScrollView>
+            <SafeAreaView>
+                <StatusBar backgroundColor={gradientColors(timeOfDay)[0]} />
+                <ScrollView>
+                    <MainSection />
+                    <InfoSection />
+                </ScrollView>
+            </SafeAreaView>
         </LinearGradient>
     );
 };

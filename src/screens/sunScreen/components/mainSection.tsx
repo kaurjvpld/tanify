@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     container: {
         height: hp('100%'),
         alignItems: 'center',
-        paddingTop: hp('10%'),
+        paddingTop: hp('8%'),
         paddingHorizontal: wp('6%'),
     },
     tanifyLogoContainer: {
