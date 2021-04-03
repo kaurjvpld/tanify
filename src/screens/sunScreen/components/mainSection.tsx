@@ -7,9 +7,9 @@ import {
     numbers,
     circleViewColor,
     textColor,
-} from '../../../util/systemStateUtil.tsx';
-import { StyleSheet, View, Dimensions, Image, Text } from 'react-native';
-import { TimeOfDay } from '../../../store/system/types';
+    radialGradientColors,
+} from '../../../util/colorUtil';
+import { StyleSheet, View, Image, Text } from 'react-native';
 import { TanifyLogo } from '../../../assets/index';
 import { useSelector } from 'react-redux';
 import UvIndex from '../../../components/uvIndex';
@@ -17,35 +17,24 @@ import I18n from '../../../i18n/index';
 import CircleView from '../../../components/circleView';
 import RadialGradient from 'react-native-radial-gradient';
 
-const MainSection = () => {
-    const timeOfDay = useSelector((state) => state.system.timeOfDay);
-    const temperature = useSelector((state) => state.system.temperature);
-    const uv = useSelector((state) => state.system.uv);
-    const mode = useSelector((state) => state.system.mode);
-    const location = useSelector((state) => state.system.location);
+const logoWidthHeightRatio = 2.729;
 
-    const windowHeight = Dimensions.get('window').height;
-    const logoWidthHeightRatio = 2.729;
-    const logoHeight = windowHeight * 0.17;
-    const logoWidth = logoHeight * logoWidthHeightRatio;
+const MainSection = () => {
+    const temperature = useSelector((state) => state.system.temperature);
+    const timeOfDay = useSelector((state) => state.system.timeOfDay);
+    const location = useSelector((state) => state.system.location);
+    const mode = useSelector((state) => state.system.mode);
+    const uv = useSelector((state) => state.system.uv);
 
     return (
         <RadialGradient
             style={styles.radialGradient}
-            colors={
-                timeOfDay === TimeOfDay.Day
-                    ? ['#3eb1dd', '#3d8bdd']
-                    : ['transparent', 'transparent']
-            }
+            colors={radialGradientColors(timeOfDay)}
             stops={[0.4]}
             radius={200}>
             <View style={styles.container}>
-                <View style={{ width: logoWidth }}>
-                    <View
-                        style={[
-                            styles.tanifyLogoContainer,
-                            { height: logoHeight },
-                        ]}>
+                <View style={styles.tempContainer}>
+                    <View style={styles.tanifyLogoContainer}>
                         <Image source={TanifyLogo} style={styles.tanifyLogo} />
                     </View>
                     <Text style={styles.temp}>
@@ -97,6 +86,7 @@ const styles = StyleSheet.create({
         width: wp('100%'),
     },
     tanifyLogoContainer: {
+        height: hp('17%'),
         width: '100%',
     },
     tanifyLogo: {
@@ -104,6 +94,9 @@ const styles = StyleSheet.create({
         width: null,
         height: null,
         resizeMode: 'contain',
+    },
+    tempContainer: {
+        width: hp('17%') * logoWidthHeightRatio,
     },
     temp: {
         color: '#FFFFFF',

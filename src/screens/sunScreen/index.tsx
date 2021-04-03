@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { gradientColors } from '../../util/systemStateUtil';
+import { gradientColors } from '../../util/colorUtil';
 import { useSelector } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import MainSection from './components/mainSection';

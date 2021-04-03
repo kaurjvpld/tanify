@@ -1,5 +1,5 @@
 import React from 'react';
-import { circleViewColor, textColor } from '../../../util/systemStateUtil.tsx';
+import { circleViewColor, textColor } from '../../../util/colorUtil';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { StyleSheet, View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
