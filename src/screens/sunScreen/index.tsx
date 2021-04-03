@@ -10,31 +10,26 @@ import {
 import { useSelector } from 'react-redux';
 import { TanifyLogo } from '../../assets';
 import { TimeOfDay, Mode } from '../../store/system/types';
+import {
+    // widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 import LinearGradient from 'react-native-linear-gradient';
 import RadialGradient from 'react-native-radial-gradient';
 import CircleView from '../../components/circleView';
 import UvIndex from '../../components/uvIndex';
 import I18n from '../../i18n/index';
-
-const numbers = [
-    'zero',
-    'one',
-    'two',
-    'three',
-    'four',
-    'five',
-    'six',
-    'seven',
-    'eight',
-    'nine',
-    'ten',
-    'eleven',
-    'twelve',
-];
+import {
+    numbers,
+    circleViewColor,
+    gradientColors,
+    textColor,
+} from '../../util/systemStateUtil';
 
 const SunScreen = () => {
     const timeOfDay = useSelector((state) => state.system.timeOfDay);
-    const mode = useSelector((state) => state.system.mode);
+    // const mode = useSelector((state) => state.system.mode);
+    const mode = Mode.Easy;
     const location = useSelector((state) => state.system.location);
     const uv = useSelector((state) => state.system.uv);
     const temperature = useSelector((state) => state.system.temperature);
@@ -45,59 +40,8 @@ const SunScreen = () => {
     const logoHeight = windowHeight * 0.17;
     const logoWidth = logoHeight * logoWidthHeightRatio;
 
-    const circeViewColor = (() => {
-        switch (mode) {
-            case Mode.Safe:
-                return '#00cc7e';
-            case Mode.Easy:
-                return '#ffce00';
-            case Mode.Medium:
-                return '#ff9700';
-            case Mode.Hard:
-                return '#ff5500';
-            case Mode.Extreme:
-                return '#6900ff';
-            default:
-                return '#00cc7e';
-        }
-    })();
-
-    const gradientColors = (() => {
-        switch (timeOfDay) {
-            case TimeOfDay.Cloudy:
-                return ['#9e9e9e', '#9e9e9e'];
-            case TimeOfDay.Sunrise:
-                return ['#fc63a1', '#3d8bdd'];
-            case TimeOfDay.Day:
-                return ['#3d8bdd', '#3d8bdd'];
-            case TimeOfDay.Sunset:
-                return ['#fc63a1', '#edd937'];
-            case TimeOfDay.Night:
-                return ['#2b2b2b', '#2b2b2b'];
-            default:
-                return ['#9e9e9e', '#9e9e9e'];
-        }
-    })();
-
-    const textColor = (() => {
-        switch (timeOfDay) {
-            case TimeOfDay.Cloudy:
-                return '#9e9e9e';
-            case TimeOfDay.Sunrise:
-                return '#3d8bdd';
-            case TimeOfDay.Day:
-                return '#3d8bdd';
-            case TimeOfDay.Sunset:
-                return '#edd937';
-            case TimeOfDay.Night:
-                return '#2b2b2b';
-            default:
-                return '#9e9e9e';
-        }
-    })();
-
     return (
-        <LinearGradient colors={gradientColors}>
+        <LinearGradient colors={gradientColors(timeOfDay)}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 <RadialGradient
                     style={{
@@ -141,15 +85,22 @@ const SunScreen = () => {
                         </Text>
                         <CircleView
                             diameter={80}
-                            color={circeViewColor}
+                            color={circleViewColor(mode)}
                             style={styles.modeContainer}>
-                            <Text style={[styles.mode, { color: textColor }]}>
+                            <Text
+                                style={[
+                                    styles.mode,
+                                    { color: textColor(timeOfDay) },
+                                ]}>
                                 {I18n.t(`mode.${mode}.title`)}
                             </Text>
                         </CircleView>
                         <View style={styles.locationContainer}>
                             <Text
-                                style={[styles.location, { color: textColor }]}>
+                                style={[
+                                    styles.location,
+                                    { color: textColor(timeOfDay) },
+                                ]}>
                                 {location?.city}, {location?.country}
                             </Text>
                         </View>
@@ -160,12 +111,20 @@ const SunScreen = () => {
                     style={[{ height: windowHeight }, styles.secondContainer]}>
                     <CircleView
                         diameter={180}
-                        color={circeViewColor}
+                        color={circleViewColor(mode)}
                         style={styles.uvStickerContainerStyle}>
                         <Text style={styles.uvStickerStyle}>UV {uv}</Text>
                     </CircleView>
-                    <View style={styles.uvInfoBoxContainerStyle}>
-                        <Text style={styles.uvInfoBoxStyle}>
+                    <View
+                        style={[
+                            styles.uvInfoBoxContainerStyle,
+                            { backgroundColor: circleViewColor(mode) },
+                        ]}>
+                        <Text
+                            style={[
+                                styles.uvInfoBoxStyle,
+                                { color: textColor(timeOfDay) },
+                            ]}>
                             {I18n.t(`mode.${mode}.title`)}
                         </Text>
                     </View>
@@ -215,7 +174,7 @@ const styles = StyleSheet.create({
     },
     temp: {
         color: '#FFFFFF',
-        fontSize: 25,
+        fontSize: hp('3.5%'),
         fontFamily: 'EuclidCircularB-Bold',
         alignSelf: 'flex-end',
         marginTop: 2,
@@ -228,7 +187,7 @@ const styles = StyleSheet.create({
     slogan: {
         color: 'white',
         marginTop: '10%',
-        fontSize: 20,
+        fontSize: hp('3%'),
         fontFamily: 'EuclidCircularB-BoldItalic',
     },
     mode: {
@@ -257,7 +216,6 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     uvInfoBoxContainerStyle: {
-        backgroundColor: 'white',
         paddingVertical: 2,
         paddingHorizontal: 30,
         width: 180,
@@ -272,7 +230,7 @@ const styles = StyleSheet.create({
     uvInfo: {
         color: 'white',
         marginTop: 50,
-        fontSize: 23,
+        fontSize: hp('3.2%'),
         fontFamily: 'EuclidCircularB-Regular',
         alignSelf: 'flex-start',
     },
