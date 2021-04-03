@@ -26,7 +26,7 @@ export const getTimeOfDay = async (
 export const getMode = (uv: number) => {
     if (uv >= 0 && uv <= 2) {
         return Mode.Safe;
-    } else if (uv >= 5 && uv <= 5) {
+    } else if (uv >= 3 && uv <= 5) {
         return Mode.Easy;
     } else if (uv >= 6 && uv <= 7) {
         return Mode.Medium;
