@@ -4,11 +4,12 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { Mode } from '../../../store/system/types';
 import CircleView from '../../../components/circleView';
 import I18n from '../../../i18n/index';
+import TanifyText from '../../../components/TanifyText';
 
 const InfoSection = () => {
     const mode = useSelector((state) => state.system.mode);
@@ -20,30 +21,36 @@ const InfoSection = () => {
                 diameter={hp('23%')}
                 color={circleViewColor(mode)}
                 style={styles.uvStickerContainerStyle}>
-                <Text style={styles.uvStickerStyle}>UV {uv}</Text>
+                <TanifyText bold={true} style={styles.uvStickerStyle}>
+                    UV {uv}
+                </TanifyText>
             </CircleView>
             <View
                 style={[
                     styles.modeContainer,
                     { backgroundColor: circleViewColor(mode) },
                 ]}>
-                <Text style={styles.mode}>{I18n.t(`mode.${mode}.title`)}</Text>
+                <TanifyText bold={true} style={styles.mode}>
+                    {I18n.t(`mode.${mode}.title`)}
+                </TanifyText>
             </View>
-            <Text style={styles.uvInfo}>{I18n.t(`mode.${mode}.info`)}</Text>
+            <TanifyText style={styles.uvInfo}>
+                {I18n.t(`mode.${mode}.info`)}
+            </TanifyText>
             {mode && mode !== Mode.Safe && (
                 <>
-                    <Text style={styles.guideTitle}>
+                    <TanifyText bold={true} style={styles.guideTitle}>
                         {I18n.t('general.beginnersGuide')}
-                    </Text>
-                    <Text style={styles.guideInfo}>
+                    </TanifyText>
+                    <TanifyText style={styles.guideInfo}>
                         {I18n.t(`mode.${mode}.beginnersGuide`)}
-                    </Text>
-                    <Text style={styles.guideTitle}>
+                    </TanifyText>
+                    <TanifyText bold={true} style={styles.guideTitle}>
                         {I18n.t('general.tanhuntersGuide')}
-                    </Text>
-                    <Text style={styles.guideInfo}>
+                    </TanifyText>
+                    <TanifyText style={styles.guideInfo}>
                         {I18n.t(`mode.${mode}.tanhuntersGuide`)}
-                    </Text>
+                    </TanifyText>
                 </>
             )}
         </View>
@@ -62,7 +69,6 @@ const styles = StyleSheet.create({
         marginTop: hp('9%'),
     },
     uvStickerStyle: {
-        fontFamily: 'EuclidCircularB-Bold',
         fontSize: hp('8%'),
         color: 'white',
     },
@@ -75,7 +81,6 @@ const styles = StyleSheet.create({
         borderRadius: 3,
     },
     mode: {
-        fontFamily: 'EuclidCircularB-Bold',
         fontSize: 25,
         color: 'white',
     },
@@ -83,19 +88,16 @@ const styles = StyleSheet.create({
         color: 'white',
         marginTop: hp('5%'),
         fontSize: hp('3.2%'),
-        fontFamily: 'EuclidCircularB-Regular',
         alignSelf: 'flex-start',
     },
     guideTitle: {
         color: 'white',
         alignSelf: 'flex-start',
-        fontFamily: 'EuclidCircularB-Bold',
         marginTop: 10,
     },
     guideInfo: {
         color: 'white',
         alignSelf: 'flex-start',
-        fontFamily: 'EuclidCircularB-Regular',
         marginTop: 5,
     },
 });

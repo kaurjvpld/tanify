@@ -9,13 +9,14 @@ import {
     textColor,
     radialGradientColors,
 } from '../../../util/colorUtil';
-import { StyleSheet, View, Image, Text } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { TanifyLogo } from '../../../assets/index';
 import { useSelector } from 'react-redux';
 import UvIndex from '../../../components/uvIndex';
 import I18n from '../../../i18n/index';
 import CircleView from '../../../components/circleView';
 import RadialGradient from 'react-native-radial-gradient';
+import TanifyText from '../../../components/TanifyText';
 
 const logoWidthHeightRatio = 2.729;
 const logoHeightPercentage = 14;
@@ -38,35 +39,34 @@ const MainSection = () => {
                     <View style={styles.tanifyLogoContainer}>
                         <Image source={TanifyLogo} style={styles.tanifyLogo} />
                     </View>
-                    <Text style={styles.temp}>
+                    <TanifyText bold={true} style={styles.temp}>
                         {temperature > 0 && '+'}
                         {temperature}°C
-                    </Text>
+                    </TanifyText>
                 </View>
 
                 <View style={styles.uv}>
                     <UvIndex index={uv} />
                 </View>
-                <Text style={styles.slogan}>
+                <TanifyText style={styles.slogan} bold={true} italic={true}>
                     ‘{I18n.t(`slogan.${numbers[uv]}`)}’
-                </Text>
+                </TanifyText>
                 <CircleView
                     diameter={hp('10%')}
                     color={circleViewColor(mode)}
                     style={styles.modeContainer}>
-                    <Text
+                    <TanifyText
+                        bold={true}
                         style={[styles.mode, { color: textColor(timeOfDay) }]}>
                         {I18n.t(`mode.${mode}.title`)}
-                    </Text>
+                    </TanifyText>
                 </CircleView>
                 <View style={styles.locationContainer}>
-                    <Text
-                        style={[
-                            styles.location,
-                            { color: textColor(timeOfDay) },
-                        ]}>
+                    <TanifyText
+                        bold={true}
+                        style={{ color: textColor(timeOfDay) }}>
                         {location?.city}, {location?.country}
-                    </Text>
+                    </TanifyText>
                 </View>
             </View>
         </RadialGradient>
@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
     temp: {
         color: '#FFFFFF',
         fontSize: hp('3.5%'),
-        fontFamily: 'EuclidCircularB-Bold',
         alignSelf: 'flex-end',
         marginTop: hp('0.3%'),
     },
@@ -115,10 +114,8 @@ const styles = StyleSheet.create({
         color: 'white',
         marginTop: hp('5%'),
         fontSize: hp('3%'),
-        fontFamily: 'EuclidCircularB-BoldItalic',
     },
     mode: {
-        fontFamily: 'EuclidCircularB-Bold',
         fontSize: hp('3%'),
     },
     modeContainer: {
@@ -130,8 +127,5 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         marginTop: hp('2%'),
         borderRadius: 3,
-    },
-    location: {
-        fontFamily: 'EuclidCircularB-Bold',
     },
 });
