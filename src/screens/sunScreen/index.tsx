@@ -7,29 +7,28 @@ import {
     Image,
     Dimensions,
 } from 'react-native';
-import { useSelector } from 'react-redux';
-import { TanifyLogo } from '../../assets';
-import { TimeOfDay, Mode } from '../../store/system/types';
 import {
     // widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import LinearGradient from 'react-native-linear-gradient';
-import RadialGradient from 'react-native-radial-gradient';
-import CircleView from '../../components/circleView';
-import UvIndex from '../../components/uvIndex';
-import I18n from '../../i18n/index';
 import {
     numbers,
     circleViewColor,
     gradientColors,
     textColor,
 } from '../../util/systemStateUtil';
+import { useSelector } from 'react-redux';
+import { TanifyLogo } from '../../assets';
+import { TimeOfDay, Mode } from '../../store/system/types';
+import LinearGradient from 'react-native-linear-gradient';
+import RadialGradient from 'react-native-radial-gradient';
+import CircleView from '../../components/circleView';
+import UvIndex from '../../components/uvIndex';
+import I18n from '../../i18n/index';
 
 const SunScreen = () => {
     const timeOfDay = useSelector((state) => state.system.timeOfDay);
-    // const mode = useSelector((state) => state.system.mode);
-    const mode = Mode.Easy;
+    const mode = useSelector((state) => state.system.mode);
     const location = useSelector((state) => state.system.location);
     const uv = useSelector((state) => state.system.uv);
     const temperature = useSelector((state) => state.system.temperature);
