@@ -54,11 +54,7 @@ const SunScreen = () => {
                     }
                     stops={[0.4]}
                     radius={200}>
-                    <View
-                        style={[
-                            { height: windowHeight },
-                            styles.mainContainer,
-                        ]}>
+                    <View style={styles.mainContainer}>
                         <View style={{ width: logoWidth }}>
                             <View
                                 style={[
@@ -106,8 +102,7 @@ const SunScreen = () => {
                     </View>
                 </RadialGradient>
 
-                <View
-                    style={[{ height: windowHeight }, styles.secondContainer]}>
+                <View style={styles.secondContainer}>
                     <CircleView
                         diameter={180}
                         color={circleViewColor(mode)}
@@ -154,11 +149,13 @@ const SunScreen = () => {
 
 const styles = StyleSheet.create({
     mainContainer: {
+        height: hp('100%'),
         alignItems: 'center',
         paddingTop: '20%',
         paddingHorizontal: 30,
     },
     secondContainer: {
+        height: hp('100%'),
         alignItems: 'center',
         paddingHorizontal: 30,
     },
