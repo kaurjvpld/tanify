@@ -5,6 +5,7 @@ import { setLocation } from '../store/system/actions';
 import { configuration } from '../../config';
 import axios from 'axios';
 
+// TODO: save location in phone memory to avoid pending on splash screen
 const useLocation = () => {
     const dispatch = useDispatch();
     const coordinates: Coordinates = useSelector(
