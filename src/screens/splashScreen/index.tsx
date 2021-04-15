@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ImageBackground } from 'react-native';
+import { StyleSheet, ImageBackground, StatusBar } from 'react-native';
 import { Splash } from '../../assets/index';
 import useAppState from '../../hooks/useAppState';
 import useWeatherData from '../../hooks/useWeatherData';
@@ -12,7 +12,12 @@ const SplashScreen = () => {
     useWeatherData();
     useAppState();
 
-    return <ImageBackground source={Splash} style={styles.container} />;
+    return (
+        <>
+            <StatusBar backgroundColor={'#3d8bdd'} />
+            <ImageBackground source={Splash} style={styles.container} />
+        </>
+    );
 };
 
 export default SplashScreen;

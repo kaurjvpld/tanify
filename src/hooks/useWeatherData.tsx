@@ -50,7 +50,7 @@ const useWeatherData = () => {
         if (timeOfMeasure && coordinates) {
             getTimeOfDay(timeOfMeasure, coordinates).then((timeOfDay) => {
                 setNewTimeOfDay(timeOfDay);
-                navigation.replace('SunScreen');
+                // navigation.replace('SunScreen');
             });
         }
     }, [dispatch, coordinates, timeOfMeasure, navigation]);
