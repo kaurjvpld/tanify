@@ -4,17 +4,16 @@ import { setTimeOfMeasure } from '../store/system/actions';
 import { Alert } from 'react-native';
 import { getWeatherData } from '../services/weatherService';
 import { getTimeOfDay, getMode } from '../util/systemStateUtil';
-import { useNavigation } from '@react-navigation/native';
 import {
     setTemperature,
     setTimeOfDay,
     setMode,
     setUv,
 } from '../store/system/actions';
+import * as RootNavigation from '../navigation/RootNavigation';
 
 const useWeatherData = () => {
     const dispatch = useDispatch();
-    const navigation = useNavigation();
     const coordinates: Coordinates = useSelector(
         (state) => state.system.coordinates,
     );
@@ -50,10 +49,13 @@ const useWeatherData = () => {
         if (timeOfMeasure && coordinates) {
             getTimeOfDay(timeOfMeasure, coordinates).then((timeOfDay) => {
                 setNewTimeOfDay(timeOfDay);
-                // navigation.replace('SunScreen');
+                RootNavigation.reset({
+                    index: 0,
+                    routes: [{ name: 'SunScreen' }],
+                });
             });
         }
-    }, [dispatch, coordinates, timeOfMeasure, navigation]);
+    }, [dispatch, coordinates, timeOfMeasure]);
 
     useEffect(() => {
         const setNewMode = (mode: Mode) => dispatch(setMode(mode));
