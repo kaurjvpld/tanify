@@ -31,6 +31,10 @@ const MainSection = () => {
     const [animationProgress, setAnimationProgress] = useState(
         new Animated.Value(0),
     );
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [logoLocation, setLogoLocation] = useState(
+        new Animated.Value(hp('40%')),
+    );
 
     useEffect(() => {
         Animated.timing(animationProgress, {
@@ -39,8 +43,14 @@ const MainSection = () => {
             duration: 10000,
             easing: Easing.linear,
             useNativeDriver: true,
-        }).start();
-    }, [animationProgress]);
+        }).start(() => {
+            Animated.timing(logoLocation, {
+                toValue: hp('8%'),
+                duration: 500,
+                useNativeDriver: false,
+            }).start();
+        });
+    }, [animationProgress, logoLocation]);
 
     return (
         <RadialGradient
@@ -49,43 +59,59 @@ const MainSection = () => {
             stops={[0.4]}
             radius={200}>
             <View style={styles.container}>
-                <View style={styles.tempContainer}>
-                    <View style={styles.tanifyLogoContainer}>
-                        <LottieView
-                            source={require('../assets/logoAnimation.json')}
-                            progress={animationProgress}
-                            resizeMode="contain"
-                        />
-                    </View>
-                    <TanifyText bold={true} style={styles.temp}>
-                        {temperature > 0 && '+'}
-                        {temperature}°C
-                    </TanifyText>
-                </View>
+                <Animated.View
+                    style={{
+                        ...styles.tanifyLogoContainer,
+                        position: 'absolute',
+                        top: logoLocation,
+                    }}>
+                    <LottieView
+                        source={require('../assets/logoAnimation.json')}
+                        progress={animationProgress}
+                        resizeMode="contain"
+                    />
+                </Animated.View>
+                {true && (
+                    <>
+                        <View style={styles.tempContainer}>
+                            <View style={styles.tanifyLogoContainer} />
+                            <TanifyText bold={true} style={styles.temp}>
+                                {temperature > 0 && '+'}
+                                {temperature}°C
+                            </TanifyText>
+                        </View>
 
-                <View style={styles.uv}>
-                    <UvIndex index={uv} />
-                </View>
-                <TanifyText style={styles.slogan} bold={true} italic={true}>
-                    ‘{I18n.t(`slogan.${numbers[uv]}`)}’
-                </TanifyText>
-                <CircleView
-                    diameter={hp('10%')}
-                    color={circleViewColor(mode)}
-                    style={styles.modeContainer}>
-                    <TanifyText
-                        bold={true}
-                        style={[styles.mode, { color: textColor(timeOfDay) }]}>
-                        {I18n.t(`mode.${mode}.title`)}
-                    </TanifyText>
-                </CircleView>
-                <View style={styles.locationContainer}>
-                    <TanifyText
-                        bold={true}
-                        style={{ color: textColor(timeOfDay) }}>
-                        {location?.city}, {location?.country}
-                    </TanifyText>
-                </View>
+                        <View style={styles.uv}>
+                            <UvIndex index={uv} />
+                        </View>
+                        <TanifyText
+                            style={styles.slogan}
+                            bold={true}
+                            italic={true}>
+                            ‘{I18n.t(`slogan.${numbers[uv]}`)}’
+                        </TanifyText>
+                        <CircleView
+                            diameter={hp('10%')}
+                            color={circleViewColor(mode)}
+                            style={styles.modeContainer}>
+                            <TanifyText
+                                bold={true}
+                                style={[
+                                    styles.mode,
+                                    { color: textColor(timeOfDay) },
+                                ]}>
+                                {I18n.t(`mode.${mode}.title`)}
+                            </TanifyText>
+                        </CircleView>
+                        <View style={styles.locationContainer}>
+                            <TanifyText
+                                bold={true}
+                                style={{ color: textColor(timeOfDay) }}>
+                                {location?.city}, {location?.country}
+                            </TanifyText>
+                        </View>
+                    </>
+                )}
             </View>
         </RadialGradient>
     );
