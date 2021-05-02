@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -9,17 +9,17 @@ import {
     textColor,
     radialGradientColors,
 } from '../../../util/colorUtil';
-import { StyleSheet, View, Image } from 'react-native';
-import { TanifyLogo } from '../../../assets/index';
+import { StyleSheet, View, Animated, Easing } from 'react-native';
 import { useSelector } from 'react-redux';
 import UvIndex from '../../../components/uvIndex';
 import I18n from '../../../i18n/index';
 import CircleView from '../../../components/circleView';
 import RadialGradient from 'react-native-radial-gradient';
 import TanifyText from '../../../components/TanifyText';
+import LottieView from 'lottie-react-native';
 
-const logoWidthHeightRatio = 2.729;
-const logoHeightPercentage = 14;
+const logoWidthHeightRatio = 2.506;
+const logoHeightPercentage = 16;
 
 const MainSection = () => {
     const temperature = useSelector((state) => state.system.temperature);
@@ -27,6 +27,20 @@ const MainSection = () => {
     const location = useSelector((state) => state.system.location);
     const mode = useSelector((state) => state.system.mode);
     const uv = useSelector((state) => state.system.uv);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [animationProgress, setAnimationProgress] = useState(
+        new Animated.Value(0),
+    );
+
+    useEffect(() => {
+        Animated.timing(animationProgress, {
+            delay: 600,
+            toValue: 1,
+            duration: 10000,
+            easing: Easing.linear,
+            useNativeDriver: true,
+        }).start();
+    }, [animationProgress]);
 
     return (
         <RadialGradient
@@ -37,7 +51,11 @@ const MainSection = () => {
             <View style={styles.container}>
                 <View style={styles.tempContainer}>
                     <View style={styles.tanifyLogoContainer}>
-                        <Image source={TanifyLogo} style={styles.tanifyLogo} />
+                        <LottieView
+                            source={require('../assets/logoAnimation.json')}
+                            progress={animationProgress}
+                            resizeMode="contain"
+                        />
                     </View>
                     <TanifyText bold={true} style={styles.temp}>
                         {temperature > 0 && '+'}
