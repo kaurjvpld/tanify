@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -27,30 +27,31 @@ const MainSection = () => {
     const location = useSelector((state) => state.system.location);
     const mode = useSelector((state) => state.system.mode);
     const uv = useSelector((state) => state.system.uv);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [animationProgress, setAnimationProgress] = useState(
-        new Animated.Value(0),
-    );
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [logoLocation, setLogoLocation] = useState(
-        new Animated.Value(hp('40%')),
-    );
+    const animationProgress = useRef(new Animated.Value(0)).current;
+    const logoLocation = useRef(new Animated.Value(hp('40%'))).current;
+    const uvHeight = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
         Animated.timing(animationProgress, {
             delay: 600,
             toValue: 1,
-            duration: 10000,
+            duration: 2000,
             easing: Easing.linear,
             useNativeDriver: true,
         }).start(() => {
             Animated.timing(logoLocation, {
                 toValue: hp('8%'),
-                duration: 500,
+                duration: 300,
+                useNativeDriver: false,
+            }).start();
+
+            Animated.timing(uvHeight, {
+                toValue: hp('28%'),
+                duration: 300,
                 useNativeDriver: false,
             }).start();
         });
-    }, [animationProgress, logoLocation]);
+    }, [animationProgress, logoLocation, uvHeight]);
 
     return (
         <RadialGradient
@@ -71,47 +72,44 @@ const MainSection = () => {
                         resizeMode="contain"
                     />
                 </Animated.View>
-                {true && (
-                    <>
-                        <View style={styles.tempContainer}>
-                            <View style={styles.tanifyLogoContainer} />
-                            <TanifyText bold={true} style={styles.temp}>
-                                {temperature > 0 && '+'}
-                                {temperature}°C
-                            </TanifyText>
-                        </View>
-
-                        <View style={styles.uv}>
-                            <UvIndex index={uv} />
-                        </View>
-                        <TanifyText
-                            style={styles.slogan}
-                            bold={true}
-                            italic={true}>
-                            ‘{I18n.t(`slogan.${numbers[uv]}`)}’
+                <>
+                    <View style={styles.tempContainer}>
+                        <View style={styles.tanifyLogoContainer} />
+                        <TanifyText bold={true} style={styles.temp}>
+                            {temperature > 0 && '+'}
+                            {temperature}°C
                         </TanifyText>
-                        <CircleView
-                            diameter={hp('10%')}
-                            color={circleViewColor(mode)}
-                            style={styles.modeContainer}>
-                            <TanifyText
-                                bold={true}
-                                style={[
-                                    styles.mode,
-                                    { color: textColor(timeOfDay) },
-                                ]}>
-                                {I18n.t(`mode.${mode}.title`)}
-                            </TanifyText>
-                        </CircleView>
-                        <View style={styles.locationContainer}>
-                            <TanifyText
-                                bold={true}
-                                style={{ color: textColor(timeOfDay) }}>
-                                {location?.city}, {location?.country}
-                            </TanifyText>
-                        </View>
-                    </>
-                )}
+                    </View>
+
+                    <View style={styles.uvContainer}>
+                        <Animated.View style={{ height: uvHeight }}>
+                            <UvIndex index={uv} />
+                        </Animated.View>
+                    </View>
+                    <TanifyText style={styles.slogan} bold={true} italic={true}>
+                        ‘{I18n.t(`slogan.${numbers[uv]}`)}’
+                    </TanifyText>
+                    <CircleView
+                        diameter={hp('10%')}
+                        color={circleViewColor(mode)}
+                        style={styles.modeContainer}>
+                        <TanifyText
+                            bold={true}
+                            style={[
+                                styles.mode,
+                                { color: textColor(timeOfDay) },
+                            ]}>
+                            {I18n.t(`mode.${mode}.title`)}
+                        </TanifyText>
+                    </CircleView>
+                    <View style={styles.locationContainer}>
+                        <TanifyText
+                            bold={true}
+                            style={{ color: textColor(timeOfDay) }}>
+                            {location?.city}, {location?.country}
+                        </TanifyText>
+                    </View>
+                </>
             </View>
         </RadialGradient>
     );
@@ -148,22 +146,26 @@ const styles = StyleSheet.create({
         fontSize: hp('3.5%'),
         alignSelf: 'flex-end',
         marginTop: hp('0.3%'),
+        opacity: 0,
     },
-    uv: {
+    uvContainer: {
         marginTop: hp('7%'),
         height: hp('28%'),
         width: '100%',
+        justifyContent: 'center',
     },
     slogan: {
         color: 'white',
         marginTop: hp('5%'),
         fontSize: hp('3%'),
+        opacity: 0,
     },
     mode: {
         fontSize: hp('3%'),
     },
     modeContainer: {
         marginTop: hp('1.5%'),
+        opacity: 0,
     },
     locationContainer: {
         backgroundColor: 'white',
@@ -171,5 +173,6 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         marginTop: hp('2%'),
         borderRadius: 3,
+        opacity: 0,
     },
 });
