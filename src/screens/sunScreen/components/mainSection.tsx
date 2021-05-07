@@ -33,6 +33,7 @@ const MainSection = () => {
     const uvSpinValue = useRef(new Animated.Value(1)).current;
     const tempMarginRight = useRef(new Animated.Value(-wp('30%'))).current;
     const sloganWidth = useRef(new Animated.Value(0)).current;
+    const modeDiameter = useRef(new Animated.Value(0)).current;
 
     const uvSpin = uvSpinValue.interpolate({
         inputRange: [0, 1],
@@ -63,6 +64,18 @@ const MainSection = () => {
                     duration: 1000,
                     useNativeDriver: false,
                 }).start();
+
+                Animated.timing(modeDiameter, {
+                    toValue: hp('12%'),
+                    duration: 200,
+                    useNativeDriver: false,
+                }).start(() => {
+                    Animated.timing(modeDiameter, {
+                        toValue: hp('10%'),
+                        duration: 200,
+                        useNativeDriver: false,
+                    }).start();
+                });
             });
 
             Animated.timing(uvHeight, {
@@ -87,6 +100,7 @@ const MainSection = () => {
         uvSpinValue,
         tempMarginRight,
         sloganWidth,
+        modeDiameter,
     ]);
 
     return (
@@ -144,19 +158,23 @@ const MainSection = () => {
                         </TanifyText>
                     </Animated.View>
 
-                    <CircleView
-                        diameter={hp('10%')}
-                        color={circleViewColor(mode)}
-                        style={styles.modeContainer}>
-                        <TanifyText
-                            bold={true}
-                            style={[
-                                styles.mode,
-                                { color: textColor(timeOfDay) },
-                            ]}>
-                            {I18n.t(`mode.${mode}.title`)}
-                        </TanifyText>
-                    </CircleView>
+                    <View style={styles.modeContainer}>
+                        <CircleView
+                            diameter={modeDiameter}
+                            color={circleViewColor(mode)}>
+                            <TanifyText
+                                numberOfLines={1}
+                                ellipsizeMode="clip"
+                                bold={true}
+                                style={[
+                                    styles.mode,
+                                    { color: textColor(timeOfDay) },
+                                ]}>
+                                {I18n.t(`mode.${mode}.title`)}
+                            </TanifyText>
+                        </CircleView>
+                    </View>
+
                     <View style={styles.locationContainer}>
                         <TanifyText
                             bold={true}
@@ -218,7 +236,9 @@ const styles = StyleSheet.create({
     },
     modeContainer: {
         marginTop: hp('1.5%'),
-        opacity: 0,
+        height: hp('10%'),
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     locationContainer: {
         backgroundColor: 'white',

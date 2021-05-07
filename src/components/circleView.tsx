@@ -1,14 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Animated } from 'react-native';
 
 const CircleView = ({ diameter, color, children, style }) => {
     return (
-        <View
+        <Animated.View
             style={[
                 {
                     width: diameter ? diameter : 0,
                     height: diameter ? diameter : 0,
-                    borderRadius: diameter ? diameter / 2 : 0,
+                    borderRadius: 999,
                     backgroundColor: color ? color : '#FFFFFF',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -16,7 +16,7 @@ const CircleView = ({ diameter, color, children, style }) => {
                 style,
             ]}>
             {children}
-        </View>
+        </Animated.View>
     );
 };
 
