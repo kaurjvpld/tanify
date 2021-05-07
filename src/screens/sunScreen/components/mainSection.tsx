@@ -31,6 +31,7 @@ const MainSection = () => {
     const logoLocation = useRef(new Animated.Value(hp('40%'))).current;
     const uvHeight = useRef(new Animated.Value(0)).current;
     const uvSpinValue = useRef(new Animated.Value(1)).current;
+    const tempMarginRight = useRef(new Animated.Value(-wp('30%'))).current;
 
     const uvSpin = uvSpinValue.interpolate({
         inputRange: [0, 1],
@@ -49,7 +50,13 @@ const MainSection = () => {
                 toValue: hp('8%'),
                 duration: 300,
                 useNativeDriver: false,
-            }).start();
+            }).start(() => {
+                Animated.timing(tempMarginRight, {
+                    toValue: 0,
+                    duration: 100,
+                    useNativeDriver: false,
+                }).start();
+            });
 
             Animated.timing(uvHeight, {
                 toValue: hp('28%'),
@@ -66,7 +73,13 @@ const MainSection = () => {
                 easing: Easing.linear,
             }).start();
         });
-    }, [animationProgress, logoLocation, uvHeight, uvSpinValue]);
+    }, [
+        animationProgress,
+        logoLocation,
+        uvHeight,
+        uvSpinValue,
+        tempMarginRight,
+    ]);
 
     return (
         <RadialGradient
@@ -90,10 +103,12 @@ const MainSection = () => {
                 <>
                     <View style={styles.tempContainer}>
                         <View style={styles.tanifyLogoContainer} />
-                        <TanifyText bold={true} style={styles.temp}>
-                            {temperature > 0 && '+'}
-                            {temperature}°C
-                        </TanifyText>
+                        <Animated.View style={{ marginRight: tempMarginRight }}>
+                            <TanifyText bold={true} style={styles.temp}>
+                                {temperature > 0 && '+'}
+                                {temperature}°C
+                            </TanifyText>
+                        </Animated.View>
                     </View>
 
                     <View style={styles.uvContainer}>
@@ -165,7 +180,6 @@ const styles = StyleSheet.create({
         fontSize: hp('3.5%'),
         alignSelf: 'flex-end',
         marginTop: hp('0.3%'),
-        opacity: 0,
     },
     uvContainer: {
         marginTop: hp('7%'),
