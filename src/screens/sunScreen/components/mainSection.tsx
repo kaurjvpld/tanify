@@ -32,6 +32,7 @@ const MainSection = () => {
     const uvHeight = useRef(new Animated.Value(0)).current;
     const uvSpinValue = useRef(new Animated.Value(1)).current;
     const tempMarginRight = useRef(new Animated.Value(-wp('30%'))).current;
+    const sloganWidth = useRef(new Animated.Value(0)).current;
 
     const uvSpin = uvSpinValue.interpolate({
         inputRange: [0, 1],
@@ -54,6 +55,12 @@ const MainSection = () => {
                 Animated.timing(tempMarginRight, {
                     toValue: 0,
                     duration: 100,
+                    useNativeDriver: false,
+                }).start();
+
+                Animated.timing(sloganWidth, {
+                    toValue: wp('100%'),
+                    duration: 1000,
                     useNativeDriver: false,
                 }).start();
             });
@@ -79,6 +86,7 @@ const MainSection = () => {
         uvHeight,
         uvSpinValue,
         tempMarginRight,
+        sloganWidth,
     ]);
 
     return (
@@ -120,9 +128,22 @@ const MainSection = () => {
                             <UvIndex index={uv} />
                         </Animated.View>
                     </View>
-                    <TanifyText style={styles.slogan} bold={true} italic={true}>
-                        ‘{I18n.t(`slogan.${numbers[uv]}`)}’
-                    </TanifyText>
+                    <Animated.View
+                        style={{
+                            width: sloganWidth,
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                        }}>
+                        <TanifyText
+                            numberOfLines={1}
+                            ellipsizeMode="clip"
+                            style={styles.slogan}
+                            bold={true}
+                            italic={true}>
+                            ‘{I18n.t(`slogan.${numbers[uv]}`)}’
+                        </TanifyText>
+                    </Animated.View>
+
                     <CircleView
                         diameter={hp('10%')}
                         color={circleViewColor(mode)}
@@ -191,7 +212,6 @@ const styles = StyleSheet.create({
         color: 'white',
         marginTop: hp('5%'),
         fontSize: hp('3%'),
-        opacity: 0,
     },
     mode: {
         fontSize: hp('3%'),
