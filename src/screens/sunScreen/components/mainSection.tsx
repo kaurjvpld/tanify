@@ -30,6 +30,12 @@ const MainSection = () => {
     const animationProgress = useRef(new Animated.Value(0)).current;
     const logoLocation = useRef(new Animated.Value(hp('40%'))).current;
     const uvHeight = useRef(new Animated.Value(0)).current;
+    const uvSpinValue = useRef(new Animated.Value(1)).current;
+
+    const uvSpin = uvSpinValue.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '90deg'],
+    });
 
     useEffect(() => {
         Animated.timing(animationProgress, {
@@ -47,11 +53,20 @@ const MainSection = () => {
 
             Animated.timing(uvHeight, {
                 toValue: hp('28%'),
-                duration: 300,
+                delay: 60,
+                duration: 240,
                 useNativeDriver: false,
             }).start();
+
+            Animated.timing(uvSpinValue, {
+                toValue: 0,
+                delay: 60,
+                duration: 240,
+                useNativeDriver: false,
+                easing: Easing.linear,
+            }).start();
         });
-    }, [animationProgress, logoLocation, uvHeight]);
+    }, [animationProgress, logoLocation, uvHeight, uvSpinValue]);
 
     return (
         <RadialGradient
@@ -82,7 +97,11 @@ const MainSection = () => {
                     </View>
 
                     <View style={styles.uvContainer}>
-                        <Animated.View style={{ height: uvHeight }}>
+                        <Animated.View
+                            style={{
+                                height: uvHeight,
+                                transform: [{ rotate: uvSpin }],
+                            }}>
                             <UvIndex index={uv} />
                         </Animated.View>
                     </View>
