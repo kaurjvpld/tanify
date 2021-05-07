@@ -34,6 +34,7 @@ const MainSection = () => {
     const tempMarginRight = useRef(new Animated.Value(-wp('30%'))).current;
     const sloganWidth = useRef(new Animated.Value(0)).current;
     const modeDiameter = useRef(new Animated.Value(0)).current;
+    const locationMarginTop = useRef(new Animated.Value(hp('17%'))).current;
 
     const uvSpin = uvSpinValue.interpolate({
         inputRange: [0, 1],
@@ -55,6 +56,12 @@ const MainSection = () => {
             }).start(() => {
                 Animated.timing(tempMarginRight, {
                     toValue: 0,
+                    duration: 100,
+                    useNativeDriver: false,
+                }).start();
+
+                Animated.timing(locationMarginTop, {
+                    toValue: hp('2%'),
                     duration: 100,
                     useNativeDriver: false,
                 }).start();
@@ -101,6 +108,7 @@ const MainSection = () => {
         tempMarginRight,
         sloganWidth,
         modeDiameter,
+        locationMarginTop,
     ]);
 
     return (
@@ -175,13 +183,17 @@ const MainSection = () => {
                         </CircleView>
                     </View>
 
-                    <View style={styles.locationContainer}>
+                    <Animated.View
+                        style={{
+                            ...styles.locationContainer,
+                            marginTop: locationMarginTop,
+                        }}>
                         <TanifyText
                             bold={true}
                             style={{ color: textColor(timeOfDay) }}>
                             {location?.city}, {location?.country}
                         </TanifyText>
-                    </View>
+                    </Animated.View>
                 </>
             </View>
         </RadialGradient>
@@ -200,6 +212,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: hp('8%'),
         paddingHorizontal: wp('6%'),
+        overflow: 'hidden',
     },
     tanifyLogoContainer: {
         height: hp(logoHeightPercentage),
@@ -244,8 +257,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingHorizontal: 15,
         paddingVertical: 8,
-        marginTop: hp('2%'),
         borderRadius: 3,
-        opacity: 0,
     },
 });
