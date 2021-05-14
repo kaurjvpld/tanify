@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { routes } from './navigation/routes';
@@ -8,6 +8,7 @@ import useCoordinates from './hooks/useCoordinates';
 import useLocation from './hooks/useLocation';
 import useWeatherData from './hooks/useWeatherData';
 import useAppState from './hooks/useAppState';
+import RNBootSplash from 'react-native-bootsplash';
 
 declare const global: { HermesInternal: null | {} };
 const Stack = createStackNavigator();
@@ -17,6 +18,10 @@ const App = () => {
     useLocation();
     useWeatherData();
     useAppState();
+
+    useEffect(() => {
+        RNBootSplash.hide({ fade: true });
+    }, []);
 
     return (
         <NavigationContainer ref={navigationRef}>

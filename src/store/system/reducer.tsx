@@ -19,7 +19,7 @@ const initialState: SystemState = {
     temperature: undefined,
     uv: undefined,
     timeOfMeasure: undefined,
-    timeOfDay: TimeOfDay.Cloudy,
+    timeOfDay: TimeOfDay.Day,
     coordinates: undefined,
     location: undefined,
     dataLoading: true,

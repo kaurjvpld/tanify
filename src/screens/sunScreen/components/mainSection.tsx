@@ -17,7 +17,6 @@ import CircleView from '../../../components/circleView';
 import RadialGradient from 'react-native-radial-gradient';
 import TanifyText from '../../../components/TanifyText';
 import LottieView from 'lottie-react-native';
-import RNBootSplash from 'react-native-bootsplash';
 
 const logoWidthHeightRatio = 2.506;
 const logoHeightPercentage = 16;
@@ -45,8 +44,6 @@ const MainSection = () => {
 
     useEffect(() => {
         if (!dataLoading) {
-            RNBootSplash.hide({ fade: true });
-
             Animated.timing(animationProgress, {
                 delay: 600,
                 toValue: 1,
