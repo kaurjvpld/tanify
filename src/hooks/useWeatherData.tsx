@@ -10,7 +10,6 @@ import {
     setMode,
     setUv,
 } from '../store/system/actions';
-import * as RootNavigation from '../navigation/RootNavigation';
 
 const useWeatherData = () => {
     const dispatch = useDispatch();
@@ -49,10 +48,6 @@ const useWeatherData = () => {
         if (timeOfMeasure && coordinates) {
             getTimeOfDay(timeOfMeasure, coordinates).then((timeOfDay) => {
                 setNewTimeOfDay(timeOfDay);
-                RootNavigation.reset({
-                    index: 0,
-                    routes: [{ name: 'SunScreen' }],
-                });
             });
         }
     }, [dispatch, coordinates, timeOfMeasure]);

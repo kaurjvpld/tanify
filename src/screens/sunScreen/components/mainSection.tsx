@@ -17,6 +17,7 @@ import CircleView from '../../../components/circleView';
 import RadialGradient from 'react-native-radial-gradient';
 import TanifyText from '../../../components/TanifyText';
 import LottieView from 'lottie-react-native';
+import RNBootSplash from 'react-native-bootsplash';
 
 const logoWidthHeightRatio = 2.506;
 const logoHeightPercentage = 16;
@@ -27,6 +28,7 @@ const MainSection = () => {
     const location = useSelector((state) => state.system.location);
     const mode = useSelector((state) => state.system.mode);
     const uv = useSelector((state) => state.system.uv);
+    const coordinates = useSelector((state) => state.system.coordinates);
     const animationProgress = useRef(new Animated.Value(0)).current;
     const logoLocation = useRef(new Animated.Value(hp('40%'))).current;
     const uvHeight = useRef(new Animated.Value(0)).current;
@@ -42,64 +44,68 @@ const MainSection = () => {
     });
 
     useEffect(() => {
-        Animated.timing(animationProgress, {
-            delay: 600,
-            toValue: 1,
-            duration: 2000,
-            easing: Easing.linear,
-            useNativeDriver: true,
-        }).start(() => {
-            Animated.timing(logoLocation, {
-                toValue: hp('8%'),
-                duration: 300,
-                useNativeDriver: false,
+        if (timeOfDay && coordinates) {
+            RNBootSplash.hide({ fade: true });
+
+            Animated.timing(animationProgress, {
+                delay: 600,
+                toValue: 1,
+                duration: 2000,
+                easing: Easing.linear,
+                useNativeDriver: true,
             }).start(() => {
-                Animated.timing(tempMarginRight, {
-                    toValue: 0,
-                    duration: 100,
-                    useNativeDriver: false,
-                }).start();
-
-                Animated.timing(locationMarginTop, {
-                    toValue: hp('2%'),
-                    duration: 100,
-                    useNativeDriver: false,
-                }).start();
-
-                Animated.timing(sloganWidth, {
-                    toValue: wp('100%'),
-                    duration: 1000,
-                    useNativeDriver: false,
-                }).start();
-
-                Animated.timing(modeDiameter, {
-                    toValue: hp('12%'),
-                    duration: 200,
+                Animated.timing(logoLocation, {
+                    toValue: hp('8%'),
+                    duration: 300,
                     useNativeDriver: false,
                 }).start(() => {
-                    Animated.timing(modeDiameter, {
-                        toValue: hp('10%'),
-                        duration: 200,
+                    Animated.timing(tempMarginRight, {
+                        toValue: 0,
+                        duration: 100,
                         useNativeDriver: false,
                     }).start();
+
+                    Animated.timing(locationMarginTop, {
+                        toValue: hp('2%'),
+                        duration: 100,
+                        useNativeDriver: false,
+                    }).start();
+
+                    Animated.timing(sloganWidth, {
+                        toValue: wp('100%'),
+                        duration: 1000,
+                        useNativeDriver: false,
+                    }).start();
+
+                    Animated.timing(modeDiameter, {
+                        toValue: hp('12%'),
+                        duration: 200,
+                        useNativeDriver: false,
+                    }).start(() => {
+                        Animated.timing(modeDiameter, {
+                            toValue: hp('10%'),
+                            duration: 200,
+                            useNativeDriver: false,
+                        }).start();
+                    });
                 });
+
+                Animated.timing(uvHeight, {
+                    toValue: hp('28%'),
+                    delay: 60,
+                    duration: 240,
+                    useNativeDriver: false,
+                }).start();
+
+                Animated.timing(uvSpinValue, {
+                    toValue: 0,
+                    delay: 60,
+                    duration: 240,
+                    useNativeDriver: false,
+                    easing: Easing.linear,
+                }).start();
             });
-
-            Animated.timing(uvHeight, {
-                toValue: hp('28%'),
-                delay: 60,
-                duration: 240,
-                useNativeDriver: false,
-            }).start();
-
-            Animated.timing(uvSpinValue, {
-                toValue: 0,
-                delay: 60,
-                duration: 240,
-                useNativeDriver: false,
-                easing: Easing.linear,
-            }).start();
-        });
+        }
     }, [
         animationProgress,
         logoLocation,
@@ -109,6 +115,8 @@ const MainSection = () => {
         sloganWidth,
         modeDiameter,
         locationMarginTop,
+        coordinates,
+        timeOfDay,
     ]);
 
     return (

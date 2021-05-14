@@ -1,10 +1,9 @@
 import 'react-native-gesture-handler';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { routes } from './navigation/routes';
 import { navigationRef } from './navigation/RootNavigation';
-import SplashScreen from 'react-native-splash-screen';
 import useCoordinates from './hooks/useCoordinates';
 import useLocation from './hooks/useLocation';
 import useWeatherData from './hooks/useWeatherData';
@@ -18,12 +17,6 @@ const App = () => {
     useLocation();
     useWeatherData();
     useAppState();
-
-    useEffect(() => {
-        setTimeout(() => {
-            SplashScreen.hide();
-        }, 600);
-    }, []);
 
     return (
         <NavigationContainer ref={navigationRef}>

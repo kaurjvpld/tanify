@@ -16,10 +16,10 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* tanifyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* tanifyTests.m */; };
+		3444649F264E85EF00CAFCDC /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3444649E264E85EF00CAFCDC /* BootSplash.storyboard */; };
 		34FADE0425BC96C200A6FF4D /* EmptyFileForGeolocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FADE0325BC96C200A6FF4D /* EmptyFileForGeolocation.swift */; };
 		5C3705120B448A81F442CF5C /* libPods-tanify-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4191BCBD5870509166ECBE9E /* libPods-tanify-tvOSTests.a */; };
 		666A85FCC96900F7E76328F1 /* libPods-tanify-tanifyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C35A6830294552A5B1A9A351 /* libPods-tanify-tanifyTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9A9B073BE09F4DA2928C4AB9 /* EuclidCircularB-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBEBDA59FA1642A0B4D3D1A5 /* EuclidCircularB-BoldItalic.otf */; };
 		D452DD088C7944AA876B5C22 /* EuclidCircularB-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 81CD45BBF38E4D57BD6BEA45 /* EuclidCircularB-Regular.otf */; };
 		EF52522F403D3680B80937B8 /* libPods-tanify-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E61293517416478BF1D9DA0D /* libPods-tanify-tvOS.a */; };
@@ -59,6 +59,7 @@
 		24CFB2085AB966E4F71387A3 /* Pods-tanify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tanify.release.xcconfig"; path = "Target Support Files/Pods-tanify/Pods-tanify.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* tanify-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tanify-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* tanify-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "tanify-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3444649E264E85EF00CAFCDC /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = tanify/BootSplash.storyboard; sourceTree = "<group>"; };
 		34FADE0225BC96C200A6FF4D /* tanify-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "tanify-Bridging-Header.h"; sourceTree = "<group>"; };
 		34FADE0325BC96C200A6FF4D /* EmptyFileForGeolocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFileForGeolocation.swift; sourceTree = "<group>"; };
 		374C3CFF3AB94FA48953125D /* Pods-tanify-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tanify-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-tanify-tvOSTests/Pods-tanify-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -66,7 +67,6 @@
 		4C61AEA339C97F20A92EDA90 /* Pods-tanify-tanifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tanify-tanifyTests.debug.xcconfig"; path = "Target Support Files/Pods-tanify-tanifyTests/Pods-tanify-tanifyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		568E04621DB5E343E7006072 /* Pods-tanify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tanify.debug.xcconfig"; path = "Target Support Files/Pods-tanify/Pods-tanify.debug.xcconfig"; sourceTree = "<group>"; };
 		70213B2E5DF342E7AD4352EA /* EuclidCircularB-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "EuclidCircularB-Bold.otf"; path = "../assets/fonts/EuclidCircularB-Bold.otf"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = tanify/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81CD45BBF38E4D57BD6BEA45 /* EuclidCircularB-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "EuclidCircularB-Regular.otf"; path = "../assets/fonts/EuclidCircularB-Regular.otf"; sourceTree = "<group>"; };
 		9F5E2E54D240FF69B29BE4D5 /* Pods-tanify-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tanify-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-tanify-tvOS/Pods-tanify-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		C35A6830294552A5B1A9A351 /* libPods-tanify-tanifyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tanify-tanifyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,12 +134,12 @@
 		13B07FAE1A68108700A75B9A /* tanify */ = {
 			isa = PBXGroup;
 			children = (
+				3444649E264E85EF00CAFCDC /* BootSplash.storyboard */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				34FADE0325BC96C200A6FF4D /* EmptyFileForGeolocation.swift */,
 				34FADE0225BC96C200A6FF4D /* tanify-Bridging-Header.h */,
@@ -363,9 +363,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				1B7023B7F14B4BF6AB7FBC76 /* EuclidCircularB-Bold.otf in Resources */,
+				3444649F264E85EF00CAFCDC /* BootSplash.storyboard in Resources */,
 				9A9B073BE09F4DA2928C4AB9 /* EuclidCircularB-BoldItalic.otf in Resources */,
 				D452DD088C7944AA876B5C22 /* EuclidCircularB-Regular.otf in Resources */,
 			);
