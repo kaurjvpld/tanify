@@ -1,4 +1,3 @@
-import { SET_TIME_OF_MEASURE, SET_APP_STATE } from './types';
 import {
     SystemState,
     SystemActionTypes,
@@ -8,6 +7,9 @@ import {
     SET_COORDINATES,
     SET_LOCATION,
     SET_UV,
+    SET_DATA_LOADING,
+    SET_TIME_OF_MEASURE,
+    SET_APP_STATE,
     TimeOfDay,
     Mode,
 } from './types';
@@ -20,6 +22,7 @@ const initialState: SystemState = {
     timeOfDay: TimeOfDay.Cloudy,
     coordinates: undefined,
     location: undefined,
+    dataLoading: true,
 };
 
 const systemReducer: (
@@ -66,6 +69,11 @@ const systemReducer: (
             return {
                 ...state,
                 appState: action.payload,
+            };
+        case SET_DATA_LOADING:
+            return {
+                ...state,
+                dataLoading: action.payload,
             };
         default:
             return state;

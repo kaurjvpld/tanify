@@ -28,7 +28,7 @@ const MainSection = () => {
     const location = useSelector((state) => state.system.location);
     const mode = useSelector((state) => state.system.mode);
     const uv = useSelector((state) => state.system.uv);
-    const coordinates = useSelector((state) => state.system.coordinates);
+    const dataLoading = useSelector((state) => state.system.dataLoading);
     const animationProgress = useRef(new Animated.Value(0)).current;
     const logoLocation = useRef(new Animated.Value(hp('40%'))).current;
     const uvHeight = useRef(new Animated.Value(0)).current;
@@ -44,7 +44,7 @@ const MainSection = () => {
     });
 
     useEffect(() => {
-        if (timeOfDay && coordinates) {
+        if (!dataLoading) {
             RNBootSplash.hide({ fade: true });
 
             Animated.timing(animationProgress, {
@@ -115,8 +115,7 @@ const MainSection = () => {
         sloganWidth,
         modeDiameter,
         locationMarginTop,
-        coordinates,
-        timeOfDay,
+        dataLoading,
     ]);
 
     return (

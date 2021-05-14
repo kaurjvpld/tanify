@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTimeOfMeasure } from '../store/system/actions';
+import { setTimeOfMeasure, setDataLoading } from '../store/system/actions';
 import { Alert } from 'react-native';
 import { getWeatherData } from '../services/weatherService';
 import { getTimeOfDay, getMode } from '../util/systemStateUtil';
@@ -44,10 +44,13 @@ const useWeatherData = () => {
     useEffect(() => {
         const setNewTimeOfDay = (timeOfDay: TimeOfDay) =>
             dispatch(setTimeOfDay(timeOfDay));
+        const setNewDataLoading = (dataLoading: boolean) =>
+            dispatch(setDataLoading(dataLoading));
 
         if (timeOfMeasure && coordinates) {
             getTimeOfDay(timeOfMeasure, coordinates).then((timeOfDay) => {
                 setNewTimeOfDay(timeOfDay);
+                setNewDataLoading(false);
             });
         }
     }, [dispatch, coordinates, timeOfMeasure]);

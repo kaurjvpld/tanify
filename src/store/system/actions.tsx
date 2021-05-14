@@ -11,6 +11,7 @@ import {
     SET_LOCATION,
     SET_TIME_OF_MEASURE,
     SET_APP_STATE,
+    SET_DATA_LOADING,
 } from './types';
 
 export const setMode: (mode: Mode) => SystemActionTypes = (mode) => {
@@ -93,5 +94,14 @@ export const setAppState: (appState: string) => SystemActionTypes = (
     return {
         type: SET_APP_STATE,
         payload: appState,
+    };
+};
+
+export const setDataLoading: (dataLoading: boolean) => SystemActionTypes = (
+    dataLoading,
+) => {
+    return {
+        type: SET_DATA_LOADING,
+        payload: dataLoading,
     };
 };

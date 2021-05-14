@@ -8,6 +8,7 @@ export const SET_LOCATION: string = 'SET_LOCATION';
 export const SET_UV: string = 'SET_UV';
 export const SET_TIME_OF_MEASURE: string = 'SET_TIME_OF_MEASURE';
 export const SET_APP_STATE: string = 'SET_APP_STATE';
+export const SET_DATA_LOADING: string = 'SET_DATA_LOADING';
 
 export interface SystemState {
     mode: Mode | undefined;
@@ -18,6 +19,7 @@ export interface SystemState {
     coordinates: Coordinates;
     location: Location;
     appState: string;
+    dataLoading: boolean;
 }
 
 export interface SetModeAction extends Action<typeof SET_MODE> {
@@ -53,6 +55,10 @@ export interface SetAppStateAction extends Action<typeof SET_APP_STATE> {
     payload: string;
 }
 
+export interface SetDataLoadingAction extends Action<typeof SET_DATA_LOADING> {
+    payload: boolean;
+}
+
 export type SystemActionTypes =
     | SetModeAction
     | SetTemperatureAction
@@ -61,7 +67,8 @@ export type SystemActionTypes =
     | SetTimeOfDayAction
     | SetCoordinatesAction
     | SetLocationAction
-    | SetAppStateAction;
+    | SetAppStateAction
+    | SetDataLoadingAction;
 
 export enum TimeOfDay {
     Sunrise,
