@@ -11,12 +11,12 @@ import {
 } from '../../../util/colorUtil';
 import { StyleSheet, View, Animated, Easing } from 'react-native';
 import { useSelector } from 'react-redux';
-import UvIndex from '../../../components/uvIndex';
 import I18n from '../../../i18n/index';
 import CircleView from '../../../components/circleView';
 import RadialGradient from 'react-native-radial-gradient';
 import TanifyText from '../../../components/TanifyText';
 import LottieView from 'lottie-react-native';
+import { animations } from '../../../components/uvIndex';
 
 const logoWidthHeightRatio = 2.506;
 const logoHeightPercentage = 16;
@@ -29,6 +29,7 @@ const MainSection = () => {
     const uv = useSelector((state) => state.system.uv);
     const dataLoading = useSelector((state) => state.system.dataLoading);
     const animationProgress = useRef(new Animated.Value(0)).current;
+    const uvAnimationProgress = useRef(new Animated.Value(0)).current;
     const logoLocation = useRef(new Animated.Value(hp('40%'))).current;
     const uvHeight = useRef(new Animated.Value(0)).current;
     const uvSpinValue = useRef(new Animated.Value(1)).current;
@@ -51,6 +52,13 @@ const MainSection = () => {
                 easing: Easing.linear,
                 useNativeDriver: true,
             }).start(() => {
+                Animated.timing(uvAnimationProgress, {
+                    toValue: 1,
+                    duration: 1000,
+                    easing: Easing.linear,
+                    useNativeDriver: true,
+                }).start();
+
                 Animated.timing(logoLocation, {
                     toValue: hp('8%'),
                     duration: 300,
@@ -113,6 +121,7 @@ const MainSection = () => {
         modeDiameter,
         locationMarginTop,
         dataLoading,
+        uvAnimationProgress,
     ]);
 
     return (
@@ -151,7 +160,13 @@ const MainSection = () => {
                                 height: uvHeight,
                                 transform: [{ rotate: uvSpin }],
                             }}>
-                            <UvIndex index={uv} />
+                            <LottieView
+                                source={animations.get(
+                                    uv ? uv.toString() : '0',
+                                )}
+                                progress={uvAnimationProgress}
+                                resizeMode="contain"
+                            />
                         </Animated.View>
                     </View>
                     <Animated.View

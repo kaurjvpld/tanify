@@ -16,6 +16,23 @@ import {
     Twelve,
 } from '../assets/index';
 
+export const animations = new Map([
+    ['0', require('../assets/numbers/00.json')],
+    ['1', require('../assets/numbers/01.json')],
+    ['2', require('../assets/numbers/02.json')],
+    ['3', require('../assets/numbers/03.json')],
+    ['4', require('../assets/numbers/04.json')],
+    ['5', require('../assets/numbers/05.json')],
+    ['6', require('../assets/numbers/06.json')],
+    ['7', require('../assets/numbers/07.json')],
+    ['8', require('../assets/numbers/08.json')],
+    ['9', require('../assets/numbers/09.json')],
+    ['10', require('../assets/numbers/10.json')],
+    ['11', require('../assets/numbers/11.json')],
+    ['12', require('../assets/numbers/12.json')],
+    ['13', require('../assets/numbers/12+.json')],
+]);
+
 const UvIndex = ({ index = 0 }) => {
     switch (index) {
         case 0:
