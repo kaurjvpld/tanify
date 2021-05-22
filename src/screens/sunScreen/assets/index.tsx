@@ -1,3 +1,5 @@
+import { TimeOfDay } from '../../../store/system/types';
+
 export const animations = new Map([
     ['0', require('../assets/numbers/00.json')],
     ['1', require('../assets/numbers/01.json')],
@@ -18,4 +20,12 @@ export const animations = new Map([
     ['16', require('../assets/numbers/12+.json')],
     ['17', require('../assets/numbers/12+.json')],
     ['18', require('../assets/numbers/12+.json')],
+]);
+
+export const gradientColors = new Map([
+    [TimeOfDay.Cloudy, ['#9e9e9e', '#9e9e9e']],
+    [TimeOfDay.Sunrise, ['#fc63a1', '#3d8bdd']],
+    [TimeOfDay.Day, ['#3d8bdd', '#3d8bdd']],
+    [TimeOfDay.Sunset, ['#fc63a1', '#edd937']],
+    [TimeOfDay.Night, ['#2b2b2b', '#2b2b2b']],
 ]);
