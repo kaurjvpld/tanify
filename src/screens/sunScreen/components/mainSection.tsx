@@ -11,12 +11,12 @@ import {
 } from '../../../util/colorUtil';
 import { StyleSheet, View, Animated, Easing } from 'react-native';
 import { useSelector } from 'react-redux';
+import { animations } from '../assets/index';
 import I18n from '../../../i18n/index';
 import CircleView from '../../../components/circleView';
 import RadialGradient from 'react-native-radial-gradient';
 import TanifyText from '../../../components/TanifyText';
 import LottieView from 'lottie-react-native';
-import { animations } from '../../../components/uvIndex';
 
 const logoWidthHeightRatio = 2.506;
 const logoHeightPercentage = 16;
@@ -29,7 +29,6 @@ const MainSection = () => {
     const uv = useSelector((state) => state.system.uv);
     const dataLoading = useSelector((state) => state.system.dataLoading);
     const animationProgress = useRef(new Animated.Value(0)).current;
-    const uvAnimationProgress = useRef(new Animated.Value(0)).current;
     const logoLocation = useRef(new Animated.Value(hp('40%'))).current;
     const uvHeight = useRef(new Animated.Value(0)).current;
     const uvSpinValue = useRef(new Animated.Value(1)).current;
@@ -37,11 +36,7 @@ const MainSection = () => {
     const sloganWidth = useRef(new Animated.Value(0)).current;
     const modeDiameter = useRef(new Animated.Value(0)).current;
     const locationMarginTop = useRef(new Animated.Value(hp('17%'))).current;
-
-    const uvSpin = uvSpinValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: ['0deg', '90deg'],
-    });
+    const uvAnimationRef = useRef();
 
     useEffect(() => {
         if (!dataLoading) {
@@ -52,12 +47,7 @@ const MainSection = () => {
                 easing: Easing.linear,
                 useNativeDriver: true,
             }).start(() => {
-                Animated.timing(uvAnimationProgress, {
-                    toValue: 1,
-                    duration: 1000,
-                    easing: Easing.linear,
-                    useNativeDriver: true,
-                }).start();
+                uvAnimationRef.current.play();
 
                 Animated.timing(logoLocation, {
                     toValue: hp('8%'),
@@ -121,7 +111,6 @@ const MainSection = () => {
         modeDiameter,
         locationMarginTop,
         dataLoading,
-        uvAnimationProgress,
     ]);
 
     return (
@@ -155,17 +144,14 @@ const MainSection = () => {
                     </View>
 
                     <View style={styles.uvContainer}>
-                        <Animated.View
-                            style={{
-                                height: uvHeight,
-                                transform: [{ rotate: uvSpin }],
-                            }}>
+                        <Animated.View style={{ height: uvHeight }}>
                             <LottieView
+                                ref={uvAnimationRef}
                                 source={animations.get(
                                     uv ? uv.toString() : '0',
                                 )}
-                                progress={uvAnimationProgress}
                                 resizeMode="contain"
+                                loop={false}
                             />
                         </Animated.View>
                     </View>
