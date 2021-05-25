@@ -5,6 +5,13 @@ export default {
         noLocation:
             'Sorry, we can’t reach your location at the moment.. Maybe go near a phone mast?',
     },
+    error: {
+        locationTimeout: {
+            title: 'Location Request Timed out..',
+            body:
+                "Make sure your device's location services are turned on and that the device is somewhere it can receive and send cellular (GSM) signal.",
+        },
+    },
     slogan: {
         zero: 'Nothing interesting happens',
         one: 'Sorry, no tan do',

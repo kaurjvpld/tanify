@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
+import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserCoordinates } from '../util/mapUtil';
 import { setCoordinates, SetLocationServicesOn } from '../store/system/actions';
+import I18n from '../i18n/index';
 
 const useCoordinates = () => {
     const dispatch = useDispatch();
@@ -24,6 +26,11 @@ const useCoordinates = () => {
                 console.log('ERROR: ' + error?.message);
                 if (error?.message === 'Location settings are not satisfied.') {
                     setNewLocationServiceOn(false);
+                } else if (error?.message === 'Location request timed out.') {
+                    Alert.alert(
+                        I18n.t('error.locationTimeout.title'),
+                        I18n.t('error.locationTimeout.body'),
+                    );
                 }
             }
         };

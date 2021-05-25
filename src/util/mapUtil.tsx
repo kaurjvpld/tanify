@@ -8,8 +8,6 @@ export const getUserCoordinates = async () => {
         if (granted) {
             Geolocation.getCurrentPosition(
                 (position) => {
-                    console.log('here');
-
                     const location = {
                         latitude: position.coords.latitude,
                         longitude: position.coords.longitude,
@@ -22,7 +20,7 @@ export const getUserCoordinates = async () => {
                 },
                 {
                     enableHighAccuracy: true,
-                    timeout: 15000,
+                    timeout: 20000,
                     maximumAge: 10000,
                 },
             );
