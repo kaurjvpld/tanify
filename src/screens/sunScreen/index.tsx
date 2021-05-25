@@ -11,6 +11,7 @@ const SunScreen = () => {
     const gradientColorOne = new Animated.Value(0);
     const gradientColorTwo = new Animated.Value(0);
     const backgroundColors = gradientColors.get(timeOfDay);
+    const dataLoading = useSelector((state) => state.system.dataLoading);
     const AnimatedLinearGradient = Animated.createAnimatedComponent(
         GradientHelper,
     );
@@ -47,7 +48,7 @@ const SunScreen = () => {
                 <StatusBar backgroundColor={backgroundColors[0]} />
                 <ScrollView>
                     <MainSection />
-                    <InfoSection />
+                    {!dataLoading && <InfoSection />}
                 </ScrollView>
             </SafeAreaView>
         </AnimatedLinearGradient>
