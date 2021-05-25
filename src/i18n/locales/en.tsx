@@ -2,6 +2,8 @@ export default {
     general: {
         beginnersGuide: "Beginner's guide",
         tanhuntersGuide: "Tanhunter's guide",
+        noLocation:
+            'Sorry, we can’t reach your location at the moment.. Maybe go near a phone mast?',
     },
     slogan: {
         zero: 'Nothing interesting happens',

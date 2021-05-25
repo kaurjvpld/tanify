@@ -37,9 +37,12 @@ const MainSection = () => {
     const modeDiameter = useRef(new Animated.Value(0)).current;
     const locationMarginTop = useRef(new Animated.Value(hp('17%'))).current;
     const uvAnimationRef = useRef();
+    const locationServiceOn = useSelector(
+        (state) => state.system.locationServicesOn,
+    );
 
     useEffect(() => {
-        if (!dataLoading) {
+        if (!dataLoading && locationServiceOn) {
             Animated.timing(animationProgress, {
                 delay: 600,
                 toValue: 1,
@@ -111,6 +114,7 @@ const MainSection = () => {
         modeDiameter,
         locationMarginTop,
         dataLoading,
+        locationServiceOn,
     ]);
 
     return (
@@ -120,86 +124,105 @@ const MainSection = () => {
             stops={[0.4]}
             radius={200}>
             <View style={styles.container}>
-                <Animated.View
-                    style={{
-                        ...styles.tanifyLogoContainer,
-                        position: 'absolute',
-                        top: logoLocation,
-                    }}>
-                    <LottieView
-                        source={require('../assets/logoAnimation.json')}
-                        progress={animationProgress}
-                        resizeMode="contain"
-                    />
-                </Animated.View>
-                <>
-                    <View style={styles.tempContainer}>
-                        <View style={styles.tanifyLogoContainer} />
-                        <Animated.View style={{ marginRight: tempMarginRight }}>
-                            <TanifyText bold={true} style={styles.temp}>
-                                {temperature > 0 && '+'}
-                                {temperature}°C
-                            </TanifyText>
-                        </Animated.View>
-                    </View>
-
-                    <View style={styles.uvContainer}>
-                        <Animated.View style={{ height: uvHeight }}>
+                {locationServiceOn ? (
+                    <>
+                        <Animated.View
+                            style={{
+                                ...styles.tanifyLogoContainer,
+                                position: 'absolute',
+                                top: logoLocation,
+                            }}>
                             <LottieView
-                                ref={uvAnimationRef}
-                                source={animations.get(
-                                    uv ? uv.toString() : '0',
-                                )}
+                                source={require('../assets/logoAnimation.json')}
+                                progress={animationProgress}
                                 resizeMode="contain"
-                                loop={false}
                             />
                         </Animated.View>
-                    </View>
-                    <Animated.View
-                        style={{
-                            width: sloganWidth,
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                        }}>
-                        <TanifyText
-                            numberOfLines={1}
-                            ellipsizeMode="clip"
-                            style={styles.slogan}
-                            bold={true}
-                            italic={true}>
-                            ‘{I18n.t(`slogan.${numbers[uv]}`)}’
-                        </TanifyText>
-                    </Animated.View>
+                        <View style={styles.tempContainer}>
+                            <View style={styles.tanifyLogoContainer} />
+                            <Animated.View
+                                style={{ marginRight: tempMarginRight }}>
+                                <TanifyText bold={true} style={styles.temp}>
+                                    {temperature > 0 && '+'}
+                                    {temperature}°C
+                                </TanifyText>
+                            </Animated.View>
+                        </View>
 
-                    <View style={styles.modeContainer}>
-                        <CircleView
-                            diameter={modeDiameter}
-                            color={circleViewColor(mode)}>
+                        <View style={styles.uvContainer}>
+                            <Animated.View style={{ height: uvHeight }}>
+                                <LottieView
+                                    ref={uvAnimationRef}
+                                    source={animations.get(
+                                        uv ? uv.toString() : '0',
+                                    )}
+                                    resizeMode="contain"
+                                    loop={false}
+                                />
+                            </Animated.View>
+                        </View>
+                        <Animated.View
+                            style={{
+                                width: sloganWidth,
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                            }}>
                             <TanifyText
                                 numberOfLines={1}
                                 ellipsizeMode="clip"
+                                style={styles.slogan}
                                 bold={true}
-                                style={[
-                                    styles.mode,
-                                    { color: textColor(timeOfDay) },
-                                ]}>
-                                {I18n.t(`mode.${mode}.title`)}
+                                italic={true}>
+                                ‘{I18n.t(`slogan.${numbers[uv]}`)}’
                             </TanifyText>
-                        </CircleView>
-                    </View>
+                        </Animated.View>
 
-                    <Animated.View
+                        <View style={styles.modeContainer}>
+                            <CircleView
+                                diameter={modeDiameter}
+                                color={circleViewColor(mode)}>
+                                <TanifyText
+                                    numberOfLines={1}
+                                    ellipsizeMode="clip"
+                                    bold={true}
+                                    style={[
+                                        styles.mode,
+                                        { color: textColor(timeOfDay) },
+                                    ]}>
+                                    {I18n.t(`mode.${mode}.title`)}
+                                </TanifyText>
+                            </CircleView>
+                        </View>
+
+                        <Animated.View
+                            style={{
+                                ...styles.locationContainer,
+                                marginTop: locationMarginTop,
+                            }}>
+                            <TanifyText
+                                bold={true}
+                                style={{ color: textColor(timeOfDay) }}>
+                                {location?.city}, {location?.country}
+                            </TanifyText>
+                        </Animated.View>
+                    </>
+                ) : (
+                    <View
                         style={{
-                            ...styles.locationContainer,
-                            marginTop: locationMarginTop,
+                            flex: 1,
+                            justifyContent: 'center',
+                            paddingHorizontal: wp('3%'),
                         }}>
                         <TanifyText
-                            bold={true}
-                            style={{ color: textColor(timeOfDay) }}>
-                            {location?.city}, {location?.country}
+                            style={{
+                                color: 'white',
+                                fontSize: wp('5%'),
+                                textAlign: 'center',
+                            }}>
+                            {I18n.t('general.noLocation')}
                         </TanifyText>
-                    </Animated.View>
-                </>
+                    </View>
+                )}
             </View>
         </RadialGradient>
     );
