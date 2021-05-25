@@ -12,6 +12,7 @@ import {
     SET_TIME_OF_MEASURE,
     SET_APP_STATE,
     SET_DATA_LOADING,
+    SET_LOCATION_SERVICES_ON,
 } from './types';
 
 export const setMode: (mode: Mode) => SystemActionTypes = (mode) => {
@@ -103,5 +104,14 @@ export const setDataLoading: (dataLoading: boolean) => SystemActionTypes = (
     return {
         type: SET_DATA_LOADING,
         payload: dataLoading,
+    };
+};
+
+export const SetLocationServicesOn: (
+    locationServiceOn: boolean,
+) => SystemActionTypes = (locationServiceOn) => {
+    return {
+        type: SET_LOCATION_SERVICES_ON,
+        payload: locationServiceOn,
     };
 };

@@ -10,6 +10,7 @@ import {
     SET_DATA_LOADING,
     SET_TIME_OF_MEASURE,
     SET_APP_STATE,
+    SET_LOCATION_SERVICES_ON,
     TimeOfDay,
     Mode,
 } from './types';
@@ -23,6 +24,7 @@ const initialState: SystemState = {
     coordinates: undefined,
     location: undefined,
     dataLoading: true,
+    locationServicesOn: true,
 };
 
 const systemReducer: (
@@ -74,6 +76,11 @@ const systemReducer: (
             return {
                 ...state,
                 dataLoading: action.payload,
+            };
+        case SET_LOCATION_SERVICES_ON:
+            return {
+                ...state,
+                locationServicesOn: action.payload,
             };
         default:
             return state;
