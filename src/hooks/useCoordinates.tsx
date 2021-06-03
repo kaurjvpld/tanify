@@ -21,7 +21,9 @@ const useCoordinates = () => {
         const getCoordinates = async () => {
             try {
                 const userCoordinates = await getUserCoordinates();
-                setNewCoordinates(userCoordinates);
+                userCoordinates
+                    ? setNewCoordinates(userCoordinates)
+                    : setNewLocationServiceOn(false);
             } catch (error) {
                 console.log('ERROR: ' + error?.message);
                 if (error?.message === 'Location settings are not satisfied.') {
