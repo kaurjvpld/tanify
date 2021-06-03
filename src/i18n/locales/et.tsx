@@ -4,6 +4,7 @@ export default {
         tanhuntersGuide: "Tanhunter's guide",
         noLocation:
             'Sorry, we can’t reach your location at the moment.. Maybe go near a phone mast?',
+        noNetwork: 'No network connection.. Maybe go near a phone mast?',
     },
     error: {
         locationTimeout: {

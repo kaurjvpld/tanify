@@ -5,6 +5,7 @@ import { GradientHelper } from './components/GradientHelper';
 import { gradientColors } from './assets/index';
 import MainSection from './components/mainSection';
 import InfoSection from './components/infoSection';
+import Troubleshoot from './components/troubleShoot';
 
 const SunScreen = () => {
     const timeOfDay = useSelector((state) => state.system.timeOfDay);
@@ -12,6 +13,12 @@ const SunScreen = () => {
     const gradientColorTwo = new Animated.Value(0);
     const backgroundColors = gradientColors.get(timeOfDay);
     const dataLoading = useSelector((state) => state.system.dataLoading);
+    const locationServicesOn = useSelector(
+        (state) => state.system.locationServicesOn,
+    );
+    const networkConnection = useSelector(
+        (state) => state.system.networkConnection,
+    );
     const AnimatedLinearGradient = Animated.createAnimatedComponent(
         GradientHelper,
     );
@@ -39,7 +46,7 @@ const SunScreen = () => {
         }).start();
     }, [timeOfDay, gradientColorOne, gradientColorTwo]);
 
-    return (
+    return locationServicesOn && networkConnection ? (
         <AnimatedLinearGradient
             color1={gradientColorOneConfig}
             color2={gradientColorTwoConfig}
@@ -52,6 +59,8 @@ const SunScreen = () => {
                 </ScrollView>
             </SafeAreaView>
         </AnimatedLinearGradient>
+    ) : (
+        <Troubleshoot />
     );
 };
 
