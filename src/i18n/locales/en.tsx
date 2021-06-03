@@ -5,6 +5,8 @@ export default {
         noLocation:
             'Sorry, we can’t reach your location at the moment.. Maybe go near a phone mast?',
         noNetwork: 'No network connection.. Maybe go near a phone mast?',
+        troubleshoot:
+            "Also, make sure your device's location services are turned on and that the device is somewhere it can receive and send cellular (GSM) signal.",
     },
     error: {
         locationTimeout: {

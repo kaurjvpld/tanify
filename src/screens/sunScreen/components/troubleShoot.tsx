@@ -22,6 +22,8 @@ const Troubleshoot = () => {
                             ? 'general.noLocation'
                             : 'general.noNetwork',
                     )}
+                    {'\n\n '}
+                    {I18n.t('general.troubleshoot')}
                 </TanifyText>
             </View>
         </>
