@@ -11,6 +11,7 @@ import {
     SET_TIME_OF_MEASURE,
     SET_APP_STATE,
     SET_LOCATION_SERVICES_ON,
+    SET_NETWORK_CONNECTION,
     TimeOfDay,
     Mode,
 } from './types';
@@ -25,6 +26,7 @@ const initialState: SystemState = {
     location: undefined,
     dataLoading: true,
     locationServicesOn: true,
+    networkConnection: true,
 };
 
 const systemReducer: (
@@ -81,6 +83,11 @@ const systemReducer: (
             return {
                 ...state,
                 locationServicesOn: action.payload,
+            };
+        case SET_NETWORK_CONNECTION:
+            return {
+                ...state,
+                networkConnection: action.payload,
             };
         default:
             return state;

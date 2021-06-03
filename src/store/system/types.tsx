@@ -10,6 +10,7 @@ export const SET_TIME_OF_MEASURE: string = 'SET_TIME_OF_MEASURE';
 export const SET_APP_STATE: string = 'SET_APP_STATE';
 export const SET_DATA_LOADING: string = 'SET_DATA_LOADING';
 export const SET_LOCATION_SERVICES_ON: string = 'SET_LOCATION_SERVICES_ON';
+export const SET_NETWORK_CONNECTION: string = 'SET_NETWORK_CONNECTION';
 
 export interface SystemState {
     mode: Mode | undefined;
@@ -22,6 +23,7 @@ export interface SystemState {
     appState: string;
     dataLoading: boolean;
     locationServicesOn: boolean;
+    networkConnection: boolean;
 }
 
 export interface SetModeAction extends Action<typeof SET_MODE> {
@@ -66,6 +68,11 @@ export interface SetLocationServicesOnAction
     payload: boolean;
 }
 
+export interface SetNetworkConnectionAction
+    extends Action<typeof SET_NETWORK_CONNECTION> {
+    payload: boolean;
+}
+
 export type SystemActionTypes =
     | SetModeAction
     | SetTemperatureAction
@@ -76,7 +83,8 @@ export type SystemActionTypes =
     | SetLocationAction
     | SetAppStateAction
     | SetDataLoadingAction
-    | SetLocationServicesOnAction;
+    | SetLocationServicesOnAction
+    | SetNetworkConnectionAction;
 
 export enum TimeOfDay {
     Sunrise,

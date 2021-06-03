@@ -195,6 +195,8 @@ PODS:
     - React
   - react-native-geolocation-service (5.2.0):
     - React
+  - react-native-netinfo (6.0.0):
+    - React-Core
   - react-native-safe-area-context (3.2.0):
     - React-Core
   - React-RCTActionSheet (0.63.4):
@@ -325,6 +327,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-geolocation-service (from `../node_modules/react-native-geolocation-service`)
+  - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -391,6 +394,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-geolocation-service:
     :path: "../node_modules/react-native-geolocation-service"
+  react-native-netinfo:
+    :path: "../node_modules/@react-native-community/netinfo"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-RCTActionSheet:
@@ -454,6 +459,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-geolocation-service: 7c9436da6dfdecd9526c62eac62ea2bc3f0cc8ea
+  react-native-netinfo: e849fc21ca2f4128a5726c801a82fc6f4a6db50d
   react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b

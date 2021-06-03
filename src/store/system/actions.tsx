@@ -13,6 +13,7 @@ import {
     SET_APP_STATE,
     SET_DATA_LOADING,
     SET_LOCATION_SERVICES_ON,
+    SET_NETWORK_CONNECTION,
 } from './types';
 
 export const setMode: (mode: Mode) => SystemActionTypes = (mode) => {
@@ -113,5 +114,14 @@ export const SetLocationServicesOn: (
     return {
         type: SET_LOCATION_SERVICES_ON,
         payload: locationServiceOn,
+    };
+};
+
+export const setNetworkConnection: (
+    networkConnection: boolean,
+) => SystemActionTypes = (networkConnection) => {
+    return {
+        type: SET_NETWORK_CONNECTION,
+        payload: networkConnection,
     };
 };

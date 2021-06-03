@@ -9,6 +9,7 @@ import useLocation from './hooks/useLocation';
 import useWeatherData from './hooks/useWeatherData';
 import useAppState from './hooks/useAppState';
 import RNBootSplash from 'react-native-bootsplash';
+import useNetworkConnectionData from './hooks/useNetworkConnectionData';
 
 declare const global: { HermesInternal: null | {} };
 const Stack = createStackNavigator();
@@ -18,6 +19,7 @@ const App = () => {
     useLocation();
     useWeatherData();
     useAppState();
+    useNetworkConnectionData();
 
     useEffect(() => {
         RNBootSplash.hide({ fade: true });
