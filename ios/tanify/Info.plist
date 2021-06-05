@@ -39,6 +39,8 @@
 	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>In order to provide weather info based on your location.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>In order to provide weather info based on your location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>In order to provide weather info based on your location.</string>
 	<key>UIAppFonts</key>
