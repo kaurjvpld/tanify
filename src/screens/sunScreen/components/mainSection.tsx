@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
         fontSize: hp('3%'),
     },
     mode: {
-        fontSize: hp('3%'),
+        fontSize: hp('2.2%'),
     },
     modeContainer: {
         marginTop: hp('1.5%'),
