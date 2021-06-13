@@ -32,7 +32,7 @@ const MainSection = () => {
     const logoLocation = useRef(new Animated.Value(hp('40%'))).current;
     const uvHeight = useRef(new Animated.Value(0)).current;
     const uvSpinValue = useRef(new Animated.Value(1)).current;
-    const tempMarginRight = useRef(new Animated.Value(-wp('30%'))).current;
+    const tempMarginRight = useRef(new Animated.Value(-wp('40%'))).current;
     const sloganWidth = useRef(new Animated.Value(0)).current;
     const modeDiameter = useRef(new Animated.Value(0)).current;
     const locationMarginTop = useRef(new Animated.Value(hp('17%'))).current;
